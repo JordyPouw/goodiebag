@@ -1,11 +1,23 @@
 .Header {
-    display: block;
     width: 100%;
     min-width: 100%;
     min-height: 80px;
     position: fixed;
     top: 0;
     left: 0;
+    display: flex;
+    justify-content: center;
     -webkit-box-shadow: 0px 9px 14px -6px rgba(148, 148, 148, 0.3);
     box-shadow: 0px 9px 14px -6px rgba(148, 148, 148, 0.3);
+}
+
+.Header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Header .logo {
+    width: 64px;
+    height: 64px;
 }
