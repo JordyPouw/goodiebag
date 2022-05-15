@@ -4,10 +4,11 @@ import Profile from './components/Profile';
 import { Provider, createClient } from 'wagmi';
 import GoodieBag from './components/GoodieBag';
 import { providers } from 'ethers';
+import { InjectedConnector } from 'wagmi/connectors/injected';
 
 const client = createClient({
   provider(config) {
-    return new providers.JsonRpcProvider('http://127.0.0.1:8545/');
+    return new providers.JsonRpcProvider('http://127.0.0.1:8545/', 31337);
   },
 });
 
