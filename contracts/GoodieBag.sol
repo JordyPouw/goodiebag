@@ -1,74 +1,135 @@
 //SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.0;
-import "@uniswap/v3-periphery/contracts/interfaces/ISwapRouter.sol";
-import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-import "hardhat/console.sol";
 
+import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
+import '@openzeppelin/contracts/utils/Counters.sol';
+import '@openzeppelin/contracts/token/ERC721/ERC721.sol';
+import '@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol';
+
+import '@uniswap/v3-periphery/contracts/interfaces/ISwapRouter.sol';
+
+import 'hardhat/console.sol';
+
+/// @title Interface for WETH9
 interface IWETH9 is IERC20 {
-    /// @notice Deposit ether to get wrapped ether
-    function deposit() external payable;
+  /// @notice Deposit ether to get wrapped ether
+  function deposit() external payable;
 
-    /// @notice Withdraw wrapped ether to get ether
-    function withdraw(uint256) external;
+  /// @notice Withdraw wrapped ether to get ether
+  function withdraw(uint256) external;
 }
 
-contract GoodieBag is ERC721 {
-    IWETH9 wmatic = IWETH9(0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270);
-    uint256 counter = 0;
+contract GoodieBag is ERC721Enumerable {
+  using Counters for Counters.Counter;
 
-    constructor() ERC721("GoodieBag", "GBag") {}
+  struct NFTBalance {
+    address[] tokens;
+    mapping(address => uint256) balance;
+  }
 
-    struct TokenBalance {
-        address[] tokens;
-        mapping(address => uint256) balance;
+  // Counter for the NFT
+  Counters.Counter private _tokenIds;
+
+  // Related contracts
+  IWETH9 constant wmatic = IWETH9(0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270);
+  address constant eth = address(0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619);
+  ISwapRouter constant router =
+    ISwapRouter(0xE592427A0AEce92De3Edee1F18E0157C05861564);
+
+  // Where we store tokenbalance per NFT
+  mapping(uint256 => NFTBalance) tokenBalances;
+
+  constructor() ERC721('GoodieBag', 'GBag') {}
+
+  function getNFTTokenCount(uint256 nft) public view returns (uint256) {
+    return tokenBalances[nft].tokens.length;
+  }
+
+  function getNFTTokenAddress(uint256 nft, uint256 index)
+    public
+    view
+    returns (address)
+  {
+    return tokenBalances[nft].tokens[index];
+  }
+
+  function getNFTTokenBalance(uint256 nft, address tokenAddress)
+    public
+    view
+    returns (uint256)
+  {
+    return tokenBalances[nft].balance[tokenAddress];
+  }
+
+  // Mint and fill NFT
+  function mint() external payable {
+    require(msg.value > 0);
+    // Swap Matic for WMatic
+    wmatic.deposit{value: msg.value}();
+    // Mint NFT
+    uint256 newItemId = _tokenIds.current();
+    _tokenIds.increment();
+    _mint(msg.sender, newItemId);
+
+    // Add 50% as WMATIC
+    _updateBalance(newItemId, address(wmatic), msg.value / 2);
+    // Add 50% as ETH
+    uint256 ethAmount = _swapToEth(msg.value / 2);
+    _updateBalance(newItemId, eth, ethAmount);
+  }
+
+  // Redeem your the token balances from the NFT
+  function redeem(uint256 token) external {
+    require(_exists(token));
+    // Check if you own the token
+    require(ownerOf(token) == msg.sender, 'Not allowed');
+    NFTBalance storage tokenBalance = tokenBalances[token];
+    // Iterate over all tokens of the NFT and transfer the balance to NFT owner
+    for (uint256 i = 0; i < tokenBalance.tokens.length; i++) {
+      address tokenAddress = tokenBalance.tokens[i];
+      uint256 balance = tokenBalance.balance[tokenAddress];
+      if (balance > 0) {
+        tokenBalance.balance[tokenAddress] = 0;
+        IERC20(tokenAddress).transfer(msg.sender, balance);
+      }
     }
+  }
 
-    mapping(uint256 => TokenBalance) tokenBalances;
+  // Swap WMatic to ETH
+  function _swapToEth(uint256 value) internal returns (uint256 ethAmount) {
+    wmatic.approve(address(router), value);
+    ethAmount = _swapExact(
+      abi.encodePacked(address(wmatic), uint24(500), eth),
+      value
+    );
+  }
 
-    function getGoodieTokenCount(uint256 goodieBag)
-        public
-        view
-        returns (uint256)
-    {
-        return tokenBalances[goodieBag].tokens.length;
+  // Swap with uniswap
+  function _swapExact(bytes memory path, uint256 value)
+    internal
+    returns (uint256 amountOut)
+  {
+    ISwapRouter.ExactInputParams memory params = ISwapRouter.ExactInputParams({
+      path: path,
+      recipient: address(this),
+      deadline: block.timestamp,
+      amountIn: value,
+      amountOutMinimum: 0
+    });
+
+    amountOut = router.exactInput(params);
+  }
+
+  // Update the token balance of an NFT
+  function _updateBalance(
+    uint256 nft,
+    address token,
+    uint256 value
+  ) internal {
+    NFTBalance storage tokenBalance = tokenBalances[nft];
+    if (tokenBalance.balance[token] == 0) {
+      tokenBalance.tokens.push(token);
     }
-
-    function getGoodieTokenAddress(uint256 goodieBag, uint256 index)
-        public
-        view
-        returns (address)
-    {
-        return tokenBalances[goodieBag].tokens[index];
-    }
-
-    function getGoodieTokenBalance(uint256 goodieBag, address tokenAddress)
-        public
-        view
-        returns (uint256)
-    {
-        return tokenBalances[goodieBag].balance[tokenAddress];
-    }
-
-    function mint() external payable {
-        wmatic.deposit{value: msg.value}();
-        _safeMint(msg.sender, counter);
-        counter++;
-        TokenBalance storage tokenBalance = tokenBalances[0];
-        tokenBalance.tokens.push(address(wmatic));
-        tokenBalance.balance[address(wmatic)] += msg.value;
-    }
-
-    function redeem(uint256 token) external {
-        require(ownerOf(token) == msg.sender, "Not allowed");
-        TokenBalance storage tokenBalance = tokenBalances[token];
-        for (uint256 i = 0; i < tokenBalance.tokens.length; i++) {
-            address tokenAddress = tokenBalance.tokens[i];
-            uint256 balance = tokenBalance.balance[tokenAddress];
-            if (balance > 0) {
-                tokenBalance.balance[tokenAddress] = 0;
-                IERC20(tokenAddress).transfer(msg.sender, balance);
-            }
-        }
-    }
+    tokenBalance.balance[token] += value;
+  }
 }
