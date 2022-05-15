@@ -7,7 +7,7 @@ import {
 } from 'wagmi';
 import { ethers } from 'ethers';
 import { useEffect, useState } from 'react';
-import { getUserTokens } from '../helpers';
+import { getNFTTokens, getUserTokens } from '../helpers';
 
 const { abi: GoodieBagABI } = require('../contracts/GoodieBag.json');
 
@@ -42,6 +42,7 @@ export default function GoodieBag() {
   );
 
   const [userTokenIds, setUserTokenIds] = useState([]);
+  const [NFTContent, setNFTContent] = useState();
   useEffect(() => {
     if (contract) {
       getUserTokens(contract, account.address).then(setUserTokenIds);
@@ -68,6 +69,13 @@ export default function GoodieBag() {
               >
                 Redeem
               </button>
+              <button
+                onClick={() => {
+                  getNFTTokens(contract, token).then(setNFTContent);
+                }}
+              >
+                Show contents
+              </button>
             </li>
           ))}
         </ul>
@@ -84,6 +92,18 @@ export default function GoodieBag() {
       >
         Mint new goodiebag
       </button>
+      {NFTContent && (
+        <div>
+          <p>Token id: {NFTContent.tokenId}</p>
+          <ul>
+            {NFTContent.tokens.map(({ address, balance }) => (
+              <li>
+                {address}: {ethers.utils.formatEther(balance)}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }
