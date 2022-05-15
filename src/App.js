@@ -18,9 +18,9 @@ const App = () => {
       <div>
         <Header></Header>
       </div>
-      <div>
+      {/* <div>
         <Profile />
-      </div>
+      </div> */}
       <ActiveAccount>
         <div>
           <GoodieBag />

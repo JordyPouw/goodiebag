@@ -1,22 +1,24 @@
 import { useAccount, useConnect, useBalance } from 'wagmi';
 import { InjectedConnector } from 'wagmi/connectors/injected';
+import styled from 'styled-components';
 
 export default function Profile() {
   const { data: account } = useAccount();
-  const { data: balance } = useBalance({
-    addressOrName: account?.address,
-  });
+  // const { data: balance } = useBalance({
+  //   addressOrName: account?.address,
+  // });
   const { connect } = useConnect({
     connector: new InjectedConnector(),
   });
+
+
   if (account) {
     return (
-      <div>
-        <div>Connected to {account.address}</div>
-        <p>Balance {balance?.formatted} MATIC</p>
+      <div className='text-right'>
+        <div>Connected to <p className='walletadrs'>{account.address.substring(0, 4) + '...' + account.address.substring(account.address.length - 5)}</p></div>
       </div>
     );
   }
 
-  return <button onClick={() => connect()}>Connect Wallet</button>;
+  return <a onClick={() => connect()} className="button button--telesto"><span><span>Connect</span></span></a >;
 }
