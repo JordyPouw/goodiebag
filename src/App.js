@@ -4,7 +4,6 @@ import Profile from './components/Profile';
 import { Provider, createClient } from 'wagmi';
 import GoodieBag from './components/GoodieBag';
 import { providers } from 'ethers';
-import { InjectedConnector } from 'wagmi/connectors/injected';
 
 const client = createClient({
   provider(config) {

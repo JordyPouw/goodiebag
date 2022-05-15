@@ -1,8 +1,4 @@
-import {
-  useAccount,
-  useContractRead,
-  useContractWrite,
-} from 'wagmi';
+import { useAccount, useContractRead, useContractWrite } from 'wagmi';
 import { ethers } from 'ethers';
 const { abi: GoodieBagABI } = require('../contracts/GoodieBag.json');
 
