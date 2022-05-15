@@ -20,5 +20,5 @@ export default function Profile() {
     );
   }
 
-  return <a onClick={() => connect()} className="button button--telesto"><span><span>Connect</span></span></a >;
+  return <a onClick={() => connect()} className="button button--telesto"><span><span><i>Connect</i>&nbsp;&nbsp;👛</span></span></a >;
 }
