@@ -4,6 +4,7 @@ import Profile from './components/Profile';
 import { Provider, createClient } from 'wagmi';
 import GoodieBag from './components/GoodieBag';
 import { providers } from 'ethers';
+import ActiveAccount from './components/ActiveAccount';
 
 const client = createClient({
   provider(config) {
@@ -20,9 +21,11 @@ const App = () => {
       <div>
         <Profile />
       </div>
-      <div>
-        <GoodieBag />
-      </div>
+      <ActiveAccount>
+        <div>
+          <GoodieBag />
+        </div>
+      </ActiveAccount>
     </Provider>
   );
 };

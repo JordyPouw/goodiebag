@@ -1,9 +1,24 @@
-import { useAccount, useContractRead, useContractWrite } from 'wagmi';
+import {
+  useAccount,
+  useContract,
+  useContractRead,
+  useContractWrite,
+  useSigner,
+} from 'wagmi';
 import { ethers } from 'ethers';
+import { useEffect, useState } from 'react';
+import { getUserTokens } from '../helpers';
+
 const { abi: GoodieBagABI } = require('../contracts/GoodieBag.json');
 
 export default function GoodieBag() {
   const { data: account } = useAccount();
+  const signer = useSigner();
+  const contract = useContract({
+    addressOrName: '0x6DC1bEbb8e0881aCa6F082F5F53dD740c2DDF379',
+    contractInterface: GoodieBagABI,
+    signerOrProvider: signer.data,
+  });
   const totalSupply = useContractRead(
     {
       addressOrName: '0x6DC1bEbb8e0881aCa6F082F5F53dD740c2DDF379',
@@ -18,19 +33,56 @@ export default function GoodieBag() {
     },
     'mint',
   );
-  if (!account) {
+  const redeem = useContractWrite(
+    {
+      addressOrName: '0x6DC1bEbb8e0881aCa6F082F5F53dD740c2DDF379',
+      contractInterface: GoodieBagABI,
+    },
+    'redeem',
+  );
+
+  const [userTokenIds, setUserTokenIds] = useState([]);
+  useEffect(() => {
+    if (contract) {
+      getUserTokens(contract, account.address).then(setUserTokenIds);
+    }
+  }, [contract]);
+
+  if (!totalSupply.isSuccess) {
     return null;
   }
 
   return (
     <div>
       <p>Total of {totalSupply.data.toString()} goodiebags are minted</p>
+      <div>
+        You own the following goodiebags:
+        <ul>
+          {userTokenIds.map((token) => (
+            <li>
+              Goodiebag {token}
+              <button
+                onClick={() => {
+                  redeem.write({ args: [token] });
+                }}
+              >
+                Redeem
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
       <button
-        onClick={() =>
-          mint.write({ overrides: { value: ethers.utils.parseEther('1') } })
-        }
+        onClick={() => {
+          const amount = window.prompt('How much matic do you want to use?');
+          if (amount) {
+            mint.write({
+              overrides: { value: ethers.utils.parseEther(amount) },
+            });
+          }
+        }}
       >
-        Mint
+        Mint new goodiebag
       </button>
     </div>
   );
