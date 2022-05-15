@@ -33,19 +33,6 @@ module.exports = {
         url: `https://polygon-mainnet.g.alchemy.com/v2/DlBvjgVU215BORMjwDqIAxh1bPY85g34`,
         blockNumber: 28305129,
       },
-      chains: {
-        137: {
-          hardforkHistory: {
-            berlin: 10000000,
-            london: 20000000,
-          },
-        },
-      },
-    },
-    ropsten: {
-      url: process.env.ROPSTEN_URL || '',
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
     },
   },
   gasReporter: {
