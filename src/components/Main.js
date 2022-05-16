@@ -7,9 +7,11 @@ import './Main.css';
 const Main = () => {
     return (
         <section className='Main'>
-            <ActiveAccount>
-                <GoodieBag />
-            </ActiveAccount>
+            <div className='container max-w-screen-xl'>
+                <ActiveAccount>
+                    <GoodieBag />
+                </ActiveAccount>
+            </div>
         </section>
 
     );

@@ -17,10 +17,10 @@ const App = () => {
       <div>
         <Header></Header>
       </div>
+      <Main />
       {/* <div>
         <Profile />
       </div> */}
-      <Main />
     </Provider>
   );
 };

@@ -1,5 +1,7 @@
 section.Main {
     position: absolute;
+    display: flex;
+    justify-content: center;
     width: 100%;
     min-width: 100%;
     max-width: 100%;
