@@ -1,8 +1,9 @@
+import { getValue } from '@testing-library/user-event/dist/utils';
 import { useAccount, useConnect, useBalance } from 'wagmi';
 import { InjectedConnector } from 'wagmi/connectors/injected';
-import styled from 'styled-components';
 
 export default function Profile() {
+
   const { data: account } = useAccount();
   // const { data: balance } = useBalance({
   //   addressOrName: account?.address,
@@ -10,6 +11,7 @@ export default function Profile() {
   const { connect } = useConnect({
     connector: new InjectedConnector(),
   });
+
 
 
   if (account) {
@@ -20,5 +22,5 @@ export default function Profile() {
     );
   }
 
-  return <a onClick={() => connect()} className="button button--telesto"><span><span><i>Connect</i>&nbsp;&nbsp;👛</span></span></a >;
+  return <a onClick={() => connect()} className="button button--telesto"><span><span><i>Connect</i>&nbsp;&nbsp;👛</span></span></a >
 }

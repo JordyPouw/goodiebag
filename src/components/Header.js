@@ -10,7 +10,7 @@ import Profile from './Profile';
 const Header = () => {
     return (
         <section className='Header'>
-            <div className='container 5 max-w-screen-xl'>
+            <div className='container max-w-screen-xl'>
                 <div className="logo"><img src={logoUrl} alt="goodibag_logo" /></div>
                 <Profile></Profile>
             </div>
