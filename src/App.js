@@ -18,9 +18,6 @@ const App = () => {
         <Header></Header>
       </div>
       <Main />
-      {/* <div>
-        <Profile />
-      </div> */}
     </Provider>
   );
 };
