@@ -1,8 +1,8 @@
 import React from 'react';
-import Header from './components/Header';
-import Profile from './components/Profile';
-import { Provider, createClient } from 'wagmi';
 import { providers } from 'ethers';
+import { Provider, createClient } from 'wagmi';
+
+import { Sidebar } from './components/Sidebar';
 import Main from './components/Main';
 
 const client = createClient({
@@ -11,15 +11,11 @@ const client = createClient({
   },
 });
 
-const App = () => {
+export const App = () => {
   return (
     <Provider client={client}>
-      <div>
-        <Header></Header>
-      </div>
+      <Sidebar />
       <Main />
     </Provider>
   );
 };
-
-export default App;
