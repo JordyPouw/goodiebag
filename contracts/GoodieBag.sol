@@ -81,30 +81,19 @@ contract GoodieBag is ERC721Enumerable {
 
   // Redeem your the token balances from the NFT
   function redeem(uint256 token) external {
-    require(_exists(token), "token does not exist");
-
+    require(_exists(token));
     // Check if you own the token
     require(ownerOf(token) == msg.sender, 'Not allowed');
     NFTBalance storage tokenBalance = tokenBalances[token];
-
-    // Balance before
-    console.log("BEFORE token: ", 0 , " balance is: ", tokenBalance.balance[tokenBalance.tokens[0]]);
-    console.log("BEFORE token: ", 1 , " balance is: ", tokenBalance.balance[tokenBalance.tokens[1]]);
-
-    // Redeem the selected token
-    address tokenAddress = tokenBalance.tokens[token];
-    uint256 balance = tokenBalance.balance[tokenAddress];
-    
-    if (balance > 0) {
-      tokenBalance.balance[tokenAddress] = 0;
-      IERC20(tokenAddress).transfer(msg.sender, balance);
+    // Iterate over all tokens of the NFT and transfer the balance to NFT owner
+    for (uint256 i = 0; i < tokenBalance.tokens.length; i++) {
+      address tokenAddress = tokenBalance.tokens[i];
+      uint256 balance = tokenBalance.balance[tokenAddress];
+      if (balance > 0) {
+        tokenBalance.balance[tokenAddress] = 0;
+        IERC20(tokenAddress).transfer(msg.sender, balance);
+      }
     }
-
-    // Check the other tokens to make sure that they are not redeemed
-    for(uint i = 0; i<tokenBalance.tokens.length; i++){
-      console.log("AFTER token: ", tokenBalance.tokens[i] , " balance is: " , tokenBalance.balance[tokenBalance.tokens[i]]);
-    }
-
   }
 
   // Swap WMatic to ETH
