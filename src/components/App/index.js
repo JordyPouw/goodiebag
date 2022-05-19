@@ -4,7 +4,7 @@ import { Provider, createClient } from 'wagmi';
 
 import './app.css';
 import { Sidebar } from '../Sidebar';
-import { Main } from '../Main';
+import { RootRoutes as Routes } from '../../Routes';
 
 const client = createClient({
   provider(config) {
@@ -17,7 +17,7 @@ export const App = () => {
     <Provider client={client}>
       <div className="s-app">
         <Sidebar />
-        <Main />
+        <Routes />
       </div>
     </Provider>
   );
