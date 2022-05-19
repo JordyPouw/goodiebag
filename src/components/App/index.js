@@ -2,8 +2,9 @@ import React from 'react';
 import { providers } from 'ethers';
 import { Provider, createClient } from 'wagmi';
 
-import { Sidebar } from './components/Sidebar';
-import Main from './components/Main';
+import './app.css';
+import { Sidebar } from '../Sidebar';
+import { Main } from '../Main';
 
 const client = createClient({
   provider(config) {
@@ -14,8 +15,10 @@ const client = createClient({
 export const App = () => {
   return (
     <Provider client={client}>
-      <Sidebar />
-      <Main />
+      <div className="s-app">
+        <Sidebar />
+        <Main />
+      </div>
     </Provider>
   );
 };

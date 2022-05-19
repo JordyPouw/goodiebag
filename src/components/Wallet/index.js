@@ -1,7 +1,9 @@
 import { useAccount, useConnect, useBalance } from 'wagmi';
 import { InjectedConnector } from 'wagmi/connectors/injected';
 
-export default function Profile() {
+import './wallet.css';
+
+export function Wallet() {
   const { data: account } = useAccount();
   const { data: balance } = useBalance({
     addressOrName: account?.address,
@@ -11,7 +13,7 @@ export default function Profile() {
   });
   if (account) {
     return (
-      <div>
+      <div className="s-wallet">
         <div>Connected to {account.address}</div>
         <p>Balance {balance?.formatted} MATIC</p>
       </div>
