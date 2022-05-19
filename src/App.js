@@ -2,9 +2,8 @@ import React from 'react';
 import Header from './components/Header';
 import Profile from './components/Profile';
 import { Provider, createClient } from 'wagmi';
-import GoodieBag from './components/GoodieBag';
 import { providers } from 'ethers';
-import ActiveAccount from './components/ActiveAccount';
+import Main from './components/Main';
 
 const client = createClient({
   provider(config) {
@@ -18,14 +17,7 @@ const App = () => {
       <div>
         <Header></Header>
       </div>
-      <div>
-        <Profile />
-      </div>
-      <ActiveAccount>
-        <div>
-          <GoodieBag />
-        </div>
-      </ActiveAccount>
+      <Main />
     </Provider>
   );
 };
