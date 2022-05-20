@@ -14,8 +14,12 @@
 }
 
 .s-main .heading {
+  font-size: rem(18px);
+}
+
+.s-main .subheading {
   margin-bottom: 20px;
-  font-size: rem(16px);
+  font-size: rem(14px);
 }
 
 .s-main .bags {
