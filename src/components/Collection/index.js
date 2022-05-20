@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useAccount, useQuery } from 'wagmi';
 
 import './collection.css';
@@ -21,11 +22,11 @@ export const Collection = () => {
         <h3>You own the following goodiebags:</h3>
 
         {userGoodieBags.data?.map((token) => (
-          <div>
+          <Link className="bag" to={`/my-goodiebags/${token}`}>
             <h2>Goodiebag {token}</h2>
             <GoodieBagTokens tokenId={token} />
             <Redeem tokenId={token} />
-          </div>
+          </Link>
         ))}
       </ActiveAccount>
     </section>

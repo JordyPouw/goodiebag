@@ -24,7 +24,6 @@ export function GoodieBagTokens({ tokenId }) {
             {formatNumber(price.mul(balance), '26')})
           </p>
         ))}
-        <hr />
         <p>Total USD value: {formatNumber(totalUSD, '26')}</p>
       </div>
     )

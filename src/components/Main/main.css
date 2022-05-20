@@ -1,5 +1,30 @@
 .s-main {
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
+  padding: 30px;
   background: lightblue;
+}
+
+.s-main .banner {
+  width: 100%;
+  height: 300px;
+  margin-bottom: 50px;
+  background: url(https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80) no-repeat center center;
+  background-size: cover;
+}
+
+.s-main .heading {
+  margin-bottom: 20px;
+  font-size: rem(16px);
+}
+
+.s-main .bags {
+  display: flex;
+  gap: 30px;
+}
+
+.s-main .bags__bag {
+  width: 250px;
+  height: 250px;
+  background: purple;
 }

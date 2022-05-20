@@ -3,3 +3,8 @@
   width: 100%;
   background: purple;
 }
+
+.s-collection .bag {
+  display: block;
+  margin-bottom: 50px;
+}
