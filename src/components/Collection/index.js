@@ -4,7 +4,6 @@ import { useAccount, useQuery } from 'wagmi';
 import './collection.css';
 import { getUserTokens } from '../../helpers';
 import { useGoodieBag } from '../../hooks/useGoodieBag';
-import { Redeem } from '../Redeem';
 import { GoodieBagTokens } from '../GoodieBagTokens';
 import ActiveAccount from '../ActiveAccount';
 import { useTransactionEffect } from '../../hooks/useTransactionCallback';
@@ -27,7 +26,6 @@ export const Collection = () => {
           <Link className="bag" to={`/my-goodiebags/${token}`}>
             <h2>Goodiebag {token}</h2>
             <GoodieBagTokens tokenId={token} />
-            <Redeem tokenId={token} />
           </Link>
         ))}
       </ActiveAccount>
