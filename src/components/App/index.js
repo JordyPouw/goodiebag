@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { providers } from 'ethers';
 import { Provider, createClient } from 'wagmi';
 
 import './app.css';
 import { Sidebar } from '../Sidebar';
 import { RootRoutes as Routes } from '../../Routes';
+import { TransactionContext } from '../Transactions';
 
 const client = createClient({
   autoConnect: true,
@@ -14,6 +15,8 @@ const client = createClient({
 });
 
 export const App = () => {
+  const transactionContext = useContext(TransactionContext);
+
   return (
     <Provider client={client}>
       <div className="s-app">
