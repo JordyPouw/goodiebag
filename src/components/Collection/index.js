@@ -7,6 +7,7 @@ import { useGoodieBag } from '../../hooks/useGoodieBag';
 import { Redeem } from '../Redeem';
 import { GoodieBagTokens } from '../GoodieBagTokens';
 import ActiveAccount from '../ActiveAccount';
+import { useTransactionEffect } from '../../hooks/useTransactionCallback';
 
 export const Collection = () => {
   const { data: account } = useAccount();
@@ -15,6 +16,7 @@ export const Collection = () => {
     ['userGoodieBags', account?.address],
     getUserTokens.bind(this, contract, account?.address),
   );
+  useTransactionEffect(userGoodieBags.refetch);
 
   return (
     <section className="s-collection">
