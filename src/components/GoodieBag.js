@@ -4,15 +4,24 @@ import { Mint } from './Mint';
 import { useGoodieBag } from '../hooks/useGoodieBag';
 import { Redeem } from './Redeem';
 import { GoodieBagTokens } from './GoodieBagTokens';
+import { useContext, useEffect } from 'react';
+import { TransactionContext } from './Transactions';
 
 export default function GoodieBag() {
   const { data: account } = useAccount();
   const { contract, contractConfig } = useGoodieBag();
   const totalSupply = useContractRead(contractConfig, 'totalSupply');
+  const transactionContext = useContext(TransactionContext);
   const userGoodieBags = useQuery(
     ['userGoodieBags', account.address],
     getUserTokens.bind(this, contract, account.address),
   );
+  useEffect(() => {
+    if (transactionContext.transactions.length > 0) {
+      totalSupply.refetch();
+      userGoodieBags.refetch();
+    }
+  }, [transactionContext.transactions]);
 
   return (
     <div>

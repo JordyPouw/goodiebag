@@ -10,7 +10,7 @@ export function GoodieBagTokens({ tokenId }) {
     ['goodieBagTokens', tokenId],
     getNFTTokens.bind(this, contract, tokenId),
   );
-  const totalUSD = nftTokens.data.tokens.reduce(
+  const totalUSD = nftTokens.data?.tokens.reduce(
     (memo, { address, balance, price }) => memo.add(balance.mul(price)),
     ethers.utils.parseEther('0'),
   );
