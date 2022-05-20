@@ -7,6 +7,7 @@ import { Sidebar } from '../Sidebar';
 import { RootRoutes as Routes } from '../../Routes';
 
 const client = createClient({
+  autoConnect: true,
   provider(config) {
     return new providers.JsonRpcProvider('http://127.0.0.1:8545/', 31337);
   },
