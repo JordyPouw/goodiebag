@@ -3,6 +3,7 @@ import { ethers } from 'ethers';
 import { formatNumber, getNFTTokens } from '../helpers';
 import { useGoodieBag } from '../hooks/useGoodieBag';
 import { useQuery } from 'wagmi';
+import { useTransactionEffect } from '../hooks/useTransactionCallback';
 
 export function GoodieBagTokens({ tokenId }) {
   const { contract } = useGoodieBag();
@@ -10,8 +11,9 @@ export function GoodieBagTokens({ tokenId }) {
     ['goodieBagTokens', tokenId],
     getNFTTokens.bind(this, contract, tokenId),
   );
+  useTransactionEffect(nftTokens.refetch);
   const totalUSD = nftTokens.data?.tokens.reduce(
-    (memo, { address, balance, price }) => memo.add(balance.mul(price)),
+    (memo, { balance, price }) => memo.add(balance.mul(price)),
     ethers.utils.parseEther('0'),
   );
   return (
