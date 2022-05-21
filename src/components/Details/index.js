@@ -13,8 +13,11 @@ export const BagDetails = () => {
   return (
     <section className="s-bag-details">
       <ul className="breadcrumbs">
-        {crumbs.map((c) => (
-          <li>{prettyName(c)}</li>
+        {crumbs.map((c, index) => (
+          <li>
+            {bagUuid && index === crumbs.length - 1 && `Goodiebag #`}
+            {prettyName(c)}
+          </li>
         ))}
       </ul>
 
@@ -24,7 +27,9 @@ export const BagDetails = () => {
         </div>
 
         <div className="info">
-          <h2 className="name">{prettyName(bagName)}</h2>
+          <h2 className="name">
+            {bagUuid ? `Goodiebag #${bagUuid}` : prettyName(bagName)}
+          </h2>
 
           <article className="tokens">
             <div className="token">
@@ -42,7 +47,6 @@ export const BagDetails = () => {
 
       {bagUuid ? (
         <>
-          <p>your bag: {bagUuid}</p>
           <Redeem tokenId={bagUuid} />
         </>
       ) : (

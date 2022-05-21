@@ -1,7 +1,9 @@
-import { ethers } from 'ethers';
-import { useGoodieBag } from '../hooks/useGoodieBag';
 import { useCallback, useContext, useState } from 'react';
-import { TransactionContext } from './Transactions';
+import { ethers } from 'ethers';
+
+import './mint.css';
+import { useGoodieBag } from '../../hooks/useGoodieBag';
+import { TransactionContext } from '../Transactions';
 
 export function useMint() {
   const goodieBag = useGoodieBag();
@@ -37,20 +39,24 @@ export function Mint() {
   const { mint, busy } = useMint();
 
   return (
-    <div>
-      <h3>Create new goodiebag</h3>
-      Amount of matic{' '}
-      <input
-        onChange={(e) => setValue(e.currentTarget.value)}
-        placeholder={5}
-      />
-      <div>
-        {busy ? (
-          <p>loading...</p>
-        ) : (
-          <button onClick={() => mint(value)}>Mint</button>
-        )}
+    <div className="s-mint">
+      <div className="input-wrapper">
+        <label className="label">Matic</label>
+        <input
+          className="input"
+          type="number"
+          onChange={(e) => setValue(e.currentTarget.value)}
+          placeholder={5}
+        />
       </div>
+
+      {busy ? (
+        <p>loading...</p>
+      ) : (
+        <button className="button" onClick={() => mint(value)}>
+          Mint
+        </button>
+      )}
     </div>
   );
 }
