@@ -1,5 +1,7 @@
 require('@nomiclabs/hardhat-waffle');
 require('@nomiclabs/hardhat-ethers');
+require('@nomiclabs/hardhat-etherscan');
+
 require('dotenv').config();
 
 task('accounts', 'Prints the list of accounts', async (taskArgs, hre) => {
@@ -25,6 +27,7 @@ module.exports = {
       accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
     },
   },
+
   gasReporter: {
     enabled: process.env.REPORT_GAS !== undefined,
     currency: 'USD',

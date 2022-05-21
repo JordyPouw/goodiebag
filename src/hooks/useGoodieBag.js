@@ -10,7 +10,6 @@ export function useGoodieBag() {
     addressOrName: process.env.REACT_APP_CONTRACT || contractAddress,
     contractInterface: GoodieBagABI,
   };
-  console.log(process.env.REACT_APP_CONTRACT)
   const contract = useContract({
     ...config,
     signerOrProvider: signer.data || provider,

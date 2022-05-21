@@ -41,6 +41,10 @@ interface IAAVEPool {
   ) external;
 }
 
+interface IAToken is IERC20 {
+  function scaledBalanceOf(address user) external view returns (uint256);
+}
+
 contract GoodieBag is ERC721Enumerable {
   using SafeERC20 for IERC20;
   using Counters for Counters.Counter;
@@ -58,7 +62,8 @@ contract GoodieBag is ERC721Enumerable {
 
   // Related contracts
   IWETH9 constant wmatic = IWETH9(0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270);
-  IERC20 constant awmatic = IERC20(0x6d80113e533a2C0fe82EaBD35f1875DcEA89Ea97);
+  IAToken constant awmatic =
+    IAToken(0x6d80113e533a2C0fe82EaBD35f1875DcEA89Ea97);
   address constant eth = address(0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619);
   ISwapRouter constant router =
     ISwapRouter(0xE592427A0AEce92De3Edee1F18E0157C05861564);
@@ -107,6 +112,7 @@ contract GoodieBag is ERC721Enumerable {
     _updateBalance(newItemId, eth, ethAmount);
     // Add 1/3 as Matic in aave
     uint256 awmaticBalance = awmatic.balanceOf(address(this));
+    // This is not correct and should use scaled balance
     wmatic.approve(address(aavePool), msg.value / 3);
     aavePool.deposit(address(wmatic), msg.value / 3, address(this), 0);
     awmaticBalance = awmatic.balanceOf(address(this)) - awmaticBalance;
