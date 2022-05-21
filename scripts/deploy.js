@@ -11,7 +11,7 @@ async function main() {
   /* this code writes the contract addresses to a local */
   /* file named config.js that we can use in the app */
   fs.writeFileSync(
-    './config.js',
+    './src/config.js',
     `
 		export const contractAddress = "${goodieBagNFT.address}";
   		export const ownerAddress = "${goodieBagNFT.signer.address}";

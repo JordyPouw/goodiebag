@@ -1,4 +1,5 @@
 import { useContract, useContractWrite, useProvider, useSigner } from 'wagmi';
+import { contractAddress } from '../config';
 
 const { abi: GoodieBagABI } = require('../contracts/GoodieBag.json');
 
@@ -6,7 +7,7 @@ export function useGoodieBag() {
   const signer = useSigner();
   const provider = useProvider();
   const config = {
-    addressOrName: '0x06fAddefDE8Dd5d4C6FAACe68b400754d960cb75',
+    addressOrName: process.env.CONTRACT || contractAddress,
     contractInterface: GoodieBagABI,
   };
   const contract = useContract({
