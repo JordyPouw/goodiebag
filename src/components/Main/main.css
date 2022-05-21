@@ -1,5 +1,9 @@
 .s-main {
-  height: 100vh;
-  width: 100%;
-  background: lightblue;
+	height: 100vh;
+	width: 100%;
+	background: #fff;
+	padding: 40px;
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
 }
