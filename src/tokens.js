@@ -7,6 +7,10 @@ export const tokens = {
     label: 'WETH',
     priceFeed: '0xF9680D99D6C9589e2a93a78A04A279e509205945',
   },
+  '0x6d80113e533a2C0fe82EaBD35f1875DcEA89Ea97': {
+    label: 'AWMATIC',
+    priceFeed: '0xAB594600376Ec9fD91F8e885dADF0CE036862dE0',
+  }
 };
 
 export function getByLabel(label) {

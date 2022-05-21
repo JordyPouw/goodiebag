@@ -7,5 +7,5 @@ export function useTransactionEffect(callback) {
     if (transactionContext.transactions.length > 0) {
       callback(transactionContext.transactions);
     }
-  }, [transactionContext.transactions]);
+  }, [callback, transactionContext.transactions]);
 }

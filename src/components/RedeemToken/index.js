@@ -1,17 +1,17 @@
 import { useCallback, useContext, useState } from 'react';
 
-import './redeem.css';
+import './redeem_token.css';
 import { useGoodieBag } from '../../hooks/useGoodieBag';
 import { TransactionContext } from '../Transactions';
 
-export function useRedeem(tokenId) {
+export function useRedeemToken(tokenId, tokenAddress) {
   const goodieBag = useGoodieBag();
   const transactionContext = useContext(TransactionContext);
   const [busy, setBusy] = useState(false);
-  const redeem = useCallback(() => {
+  const redeemToken = useCallback(() => {
     setBusy(true);
-    goodieBag.redeem
-      .writeAsync({ args: [tokenId] })
+    goodieBag.redeemToken
+      .writeAsync({ args: [tokenId, tokenAddress] })
       .then((data) => {
         data
           .wait()
@@ -22,19 +22,26 @@ export function useRedeem(tokenId) {
           .catch(() => setBusy(false));
       })
       .catch(() => setBusy(false));
-  }, [tokenId, goodieBag, setBusy, transactionContext]);
-  return { redeem, busy };
+  }, [tokenId, tokenAddress, goodieBag, setBusy, transactionContext]);
+  return { redeemToken, busy };
 }
 
-export function Redeem({ tokenId }) {
-  const { redeem, busy } = useRedeem(tokenId);
+export function RedeemToken({ tokenId, tokenAddress }) {
+  const { redeemToken, busy } = useRedeemToken(tokenId, tokenAddress);
   return (
-    <div className="s-redeem">
+    <div className="s-redeem_token">
       {busy ? (
         <p>loading...</p>
       ) : (
-        <button className="button" onClick={redeem}>
-          Redeem
+        <button
+          className="button"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            redeemToken();
+          }}
+        >
+          Redeem token
         </button>
       )}
     </div>

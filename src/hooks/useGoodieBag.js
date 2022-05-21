@@ -6,7 +6,7 @@ export function useGoodieBag() {
   const signer = useSigner();
   const provider = useProvider();
   const config = {
-    addressOrName: '0x6DC1bEbb8e0881aCa6F082F5F53dD740c2DDF379',
+    addressOrName: '0x06fAddefDE8Dd5d4C6FAACe68b400754d960cb75',
     contractInterface: GoodieBagABI,
   };
   const contract = useContract({
@@ -15,6 +15,14 @@ export function useGoodieBag() {
   });
   const mint = useContractWrite(config, 'mint');
   const redeem = useContractWrite(config, 'redeem');
+  const redeemToken = useContractWrite(config, 'redeemToken');
   const transferFrom = useContractWrite(config, 'transferFrom');
-  return { contractConfig: config, mint, redeem, contract, transferFrom };
+  return {
+    contractConfig: config,
+    mint,
+    redeem,
+    redeemToken,
+    contract,
+    transferFrom,
+  };
 }

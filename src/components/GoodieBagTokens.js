@@ -4,6 +4,7 @@ import { formatNumber, getNFTTokens } from '../helpers';
 import { useGoodieBag } from '../hooks/useGoodieBag';
 import { useQuery } from 'wagmi';
 import { useTransactionEffect } from '../hooks/useTransactionCallback';
+import { RedeemToken } from './RedeemToken';
 
 export function GoodieBagTokens({ tokenId }) {
   const { contract } = useGoodieBag();
@@ -24,6 +25,7 @@ export function GoodieBagTokens({ tokenId }) {
           <p>
             {tokens?.[address].label || address}: {formatNumber(balance)} ($
             {formatNumber(price.mul(balance), '26')})
+            <RedeemToken tokenId={tokenId} tokenAddress={address} />
           </p>
         ))}
         <p>Total USD value: {formatNumber(totalUSD, '26')}</p>

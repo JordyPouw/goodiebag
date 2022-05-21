@@ -28,7 +28,7 @@ export function useTransfer() {
         })
         .catch(() => setBusy(false));
     },
-    [goodieBag, setBusy, transactionContext],
+    [account?.address, goodieBag, setBusy, transactionContext],
   );
   return { transfer, busy };
 }

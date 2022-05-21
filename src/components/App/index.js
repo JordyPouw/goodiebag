@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext } from "react";
 import { providers } from 'ethers';
 import { Provider, createClient } from 'wagmi';
 
 import './app.css';
 import { Sidebar } from '../Sidebar';
 import { RootRoutes as Routes } from '../../Routes';
-import { TransactionContext } from '../Transactions';
+import { TransactionContext } from "../Transactions";
 
 const client = createClient({
   autoConnect: true,
