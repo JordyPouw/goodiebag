@@ -1,0 +1,29 @@
+.link-type-text {
+    font-size: 20px;
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
+}
+
+.link-type-text:hover {
+    text-decoration: underline;
+}
+
+.how-to-pop-up {
+    display: none;
+    position: fixed;
+    width: calc(100vw - 60px);
+    height: calc(100vh - 60px);
+    background-color: greenyellow;
+    top: 30px;
+    left: 30px;
+}
+
+.how-to-pop-up.active {
+    display: block;
+}
+
+h2.how-to-title {
+    text-align: center;
+    margin-top: 3%;
+}

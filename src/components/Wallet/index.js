@@ -2,7 +2,6 @@ import { useAccount, useBalance, useConnect } from 'wagmi';
 import { InjectedConnector } from 'wagmi/connectors/injected';
 import maticSvg from '../../assets/polygon-matic-logo.svg'
 import './wallet.css';
-import { useState } from 'react';
 import classNames from "classnames";
 import { getByLabel } from '../../tokens';
 import { formatNumber } from '../../helpers';
@@ -23,7 +22,7 @@ function WalletDetails({ account, ...props }) {
   });
   useTransactionEffect(refetch);
   return (
-    <div className={classNames('s-wallet-pop-up',{
+    <div className={classNames('s-wallet-pop-up', {
       active: props.isOpen
     })}>
 

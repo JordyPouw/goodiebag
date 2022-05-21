@@ -4,16 +4,25 @@ import ActiveAccount from '../ActiveAccount';
 import './sidebar.css';
 import logoUrl from '../../assets/logo.svg';
 import { Wallet } from '../Wallet';
+import { HowTo } from '../HowTo';
 import { useState, useCallback } from 'react';
 
 export const Sidebar = () => {
 	const [walletModal, setWalletModal] = useState(false);
+	const [howtoModal, setHowToModal] = useState(false);
 
-	const handleClick = useCallback(
+	const handleWalletClick = useCallback(
 		() => {
 			setWalletModal(!walletModal);
 		},
 		[walletModal]
+	);
+
+	const handleHowToClick = useCallback(
+		() => {
+			setHowToModal(!howtoModal);
+		},
+		[howtoModal]
 	);
 
 	return (
@@ -30,17 +39,18 @@ export const Sidebar = () => {
 					<Link to="my-goodiebags">My goodiebags</Link>
 				</li>
 				<li>
-					<Link to="how-to">How to</Link>
+					{/* <Link to="how-to">How to</Link> */}
+					<HowTo isOpen={howtoModal} handleClick={handleHowToClick}>HowTo</HowTo>
 				</li>
 			</ul>
 
 			<div className="s-bottom">
 				<ActiveAccount inactiveState={null}>
-					<button onClick={() => handleClick()}>My Wallet</button>
+					<button onClick={() => handleWalletClick()}>My Wallet</button>
 				</ActiveAccount>
 				<p className="bold">Powered by Polygon</p>
 			</div>
-			<Wallet isOpen={walletModal} handleClick={handleClick} />
+			<Wallet isOpen={walletModal} handleClick={handleWalletClick} />
 		</section>
 	);
 };
