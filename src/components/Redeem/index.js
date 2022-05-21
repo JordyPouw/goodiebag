@@ -1,6 +1,8 @@
-import { useGoodieBag } from '../hooks/useGoodieBag';
-import { TransactionContext } from './Transactions';
 import { useCallback, useContext, useState } from 'react';
+
+import './redeem.css';
+import { useGoodieBag } from '../../hooks/useGoodieBag';
+import { TransactionContext } from '../Transactions';
 
 export function useRedeem(tokenId) {
   const goodieBag = useGoodieBag();
@@ -32,8 +34,14 @@ export function useRedeem(tokenId) {
 export function Redeem({ tokenId }) {
   const { redeem, busy } = useRedeem(tokenId);
   return (
-    <div>
-      {busy ? <p>loading...</p> : <button onClick={redeem}>Redeem</button>}
+    <div className="s-redeem">
+      {busy ? (
+        <p>loading...</p>
+      ) : (
+        <button className="button" onClick={redeem}>
+          Redeem
+        </button>
+      )}
     </div>
   );
 }
