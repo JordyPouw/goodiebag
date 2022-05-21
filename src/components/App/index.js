@@ -11,7 +11,7 @@ const client = createClient({
   provider(config) {
     if (config.chainId === 137) {
       return new providers.JsonRpcProvider('https://polygon-rpc.com', 137);
-    } else if (config.chainId === 31337) {
+    } else {
       return new providers.JsonRpcProvider('http://127.0.0.1:8545/', 31337);
     }
   },

@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import ActiveAccount from '../ActiveAccount';
 
 import './sidebar.css';
 import logoUrl from '../../assets/logo.svg';
@@ -6,13 +7,13 @@ import { Wallet } from '../Wallet';
 import { useState, useCallback } from 'react';
 
 export const Sidebar = () => {
-	const [ walletModal, setWalletModal ] = useState(false);
+	const [walletModal, setWalletModal] = useState(false);
 
 	const handleClick = useCallback(
 		() => {
 			setWalletModal(!walletModal);
 		},
-		[ walletModal ]
+		[walletModal]
 	);
 
 	return (
@@ -34,7 +35,9 @@ export const Sidebar = () => {
 			</ul>
 
 			<div className="s-bottom">
-				<button onClick={() => handleClick()}>My Wallet</button>
+				<ActiveAccount inactiveState={null}>
+					<button onClick={() => handleClick()}>My Wallet</button>
+				</ActiveAccount>
 				<p className="bold">Powered by Polygon</p>
 			</div>
 			<Wallet isOpen={walletModal} handleClick={handleClick} />

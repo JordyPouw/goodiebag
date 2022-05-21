@@ -41,10 +41,6 @@ interface IAAVEPool {
   ) external;
 }
 
-interface IAToken is IERC20 {
-  function scaledBalanceOf(address user) external view returns (uint256);
-}
-
 contract GoodieBag is ERC721Enumerable {
   using SafeERC20 for IERC20;
   using Counters for Counters.Counter;
@@ -62,8 +58,7 @@ contract GoodieBag is ERC721Enumerable {
 
   // Related contracts
   IWETH9 constant wmatic = IWETH9(0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270);
-  IAToken constant awmatic =
-    IAToken(0x6d80113e533a2C0fe82EaBD35f1875DcEA89Ea97);
+  IERC20 constant awmatic = IERC20(0x6d80113e533a2C0fe82EaBD35f1875DcEA89Ea97);
   address constant eth = address(0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619);
   ISwapRouter constant router =
     ISwapRouter(0xE592427A0AEce92De3Edee1F18E0157C05861564);
@@ -72,13 +67,17 @@ contract GoodieBag is ERC721Enumerable {
 
   // Where we store tokenbalance per NFT
   mapping(uint256 => NFTBalance) tokenBalances;
+  // Keep track of the totals
+  mapping(address => uint256) tokenTotals;
 
   constructor() ERC721('GoodieBag', 'GBag') {}
 
+  // Get the number of different tokens attached to this nft
   function getNFTTokenCount(uint256 nft) public view returns (uint256) {
     return tokenBalances[nft].tokens.length;
   }
 
+  // Get the address of the token at at specific index on this nft
   function getNFTTokenAddress(uint256 nft, uint256 index)
     public
     view
@@ -87,12 +86,18 @@ contract GoodieBag is ERC721Enumerable {
     return tokenBalances[nft].tokens[index];
   }
 
+  // Get token balance for a specific token on this nft
   function getNFTTokenBalance(uint256 nft, address tokenAddress)
     public
     view
     returns (uint256)
   {
-    return tokenBalances[nft].balance[tokenAddress];
+    // Need to check ratio because of rebasing tokens like the aave tokens
+    uint256 userBalance = tokenBalances[nft].balance[tokenAddress];
+    uint256 contractTotal = tokenTotals[tokenAddress];
+    uint256 contractBalance = IERC20(tokenAddress).balanceOf(address(this));
+    return
+      contractTotal > 0 ? (userBalance * contractBalance) / contractTotal : 0;
   }
 
   // Mint and fill NFT
@@ -110,10 +115,9 @@ contract GoodieBag is ERC721Enumerable {
     // Add 1/3 as ETH
     uint256 ethAmount = _swapToEth(msg.value / 3);
     _updateBalance(newItemId, eth, ethAmount);
-    // Add 1/3 as Matic in aave
-    uint256 awmaticBalance = awmatic.balanceOf(address(this));
-    // This is not correct and should use scaled balance
+    // Add 1/3 as Matic in AAVE
     wmatic.approve(address(aavePool), msg.value / 3);
+    uint256 awmaticBalance = awmatic.balanceOf(address(this));
     aavePool.deposit(address(wmatic), msg.value / 3, address(this), 0);
     awmaticBalance = awmatic.balanceOf(address(this)) - awmaticBalance;
     _updateBalance(newItemId, address(awmatic), awmaticBalance);
@@ -125,15 +129,9 @@ contract GoodieBag is ERC721Enumerable {
     require(_exists(nft));
     // Check if you own the token
     require(ownerOf(nft) == msg.sender, 'Not allowed');
-    NFTBalance storage tokenBalance = tokenBalances[nft];
     // Iterate over all tokens of the NFT and transfer the balance to NFT owner
-    for (uint256 i = 0; i < tokenBalance.tokens.length; i++) {
-      address tokenAddress = tokenBalance.tokens[i];
-      uint256 balance = tokenBalance.balance[tokenAddress];
-      if (balance > 0) {
-        tokenBalance.balance[tokenAddress] = 0;
-        IERC20(tokenAddress).transfer(msg.sender, balance);
-      }
+    for (uint256 i = 0; i < tokenBalances[nft].tokens.length; i++) {
+      _redeemToken(nft, tokenBalances[nft].tokens[i]);
     }
   }
 
@@ -143,12 +141,31 @@ contract GoodieBag is ERC721Enumerable {
     require(_exists(nft));
     // Check if you own the token
     require(ownerOf(nft) == msg.sender, 'Not allowed');
-    NFTBalance storage tokenBalance = tokenBalances[nft];
+    _redeemToken(nft, tokenAddress);
+  }
+
+  // Helper to redeem a token from an nft
+  function _redeemToken(uint256 nft, address tokenAddress) internal {
     // Get the balance of the token and transfer the balance to NFT owner
-    uint256 balance = tokenBalance.balance[tokenAddress];
-    if (balance > 0) {
-      tokenBalance.balance[tokenAddress] = 0;
-      IERC20(tokenAddress).transfer(msg.sender, balance);
+    uint256 userBalance = tokenBalances[nft].balance[tokenAddress];
+    uint256 contractTotal = tokenTotals[tokenAddress];
+    uint256 contractBalance = IERC20(tokenAddress).balanceOf(address(this));
+
+    // Dont do division by zero
+    uint256 out = getNFTTokenBalance(nft, tokenAddress);
+    // Prevent potential rounding issues
+    if (out > contractBalance) {
+      out = contractBalance;
+    }
+    if (out > 0) {
+      // Prevent potential rounding issues
+      if (userBalance > contractTotal) {
+        tokenTotals[tokenAddress] = 0;
+      } else {
+        tokenTotals[tokenAddress] -= userBalance;
+      }
+      tokenBalances[nft].balance[tokenAddress] = 0;
+      IERC20(tokenAddress).transfer(msg.sender, out);
     }
   }
 
@@ -188,5 +205,6 @@ contract GoodieBag is ERC721Enumerable {
       tokenBalance.tokens.push(token);
     }
     tokenBalance.balance[token] += value;
+    tokenTotals[token] += value;
   }
 }
