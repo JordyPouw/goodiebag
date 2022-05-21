@@ -20,14 +20,16 @@ export const Collection = () => {
   return (
     <section className="s-collection">
       <ActiveAccount inactiveState={<EmptyState />}>
-        <h3>You own the following goodiebags:</h3>
+        <h2 className="heading">You own the following goodiebags!</h2>
 
-        {userGoodieBags.data?.map((token) => (
-          <Link className="bag" to={`/my-goodiebags/${token}`}>
-            <h2>Goodiebag {token}</h2>
-            <GoodieBagTokens tokenId={token} />
-          </Link>
-        ))}
+        <div className="bags">
+          {userGoodieBags.data?.map((token) => (
+            <Link className="bag" to={`/my-goodiebags/${token}`}>
+              <h2>Goodiebag {token}</h2>
+              <GoodieBagTokens tokenId={token} />
+            </Link>
+          ))}
+        </div>
       </ActiveAccount>
     </section>
   );
