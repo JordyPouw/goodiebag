@@ -31,6 +31,7 @@ export const Main = () => {
           <p className="bags__bag-title">Polygon goodiebag</p>
         </Link>
       </div>
+      
     </section>
   );
 };

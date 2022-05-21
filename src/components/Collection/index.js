@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useAccount, useQuery } from 'wagmi';
 
 import './collection.css';
+import maticSvg from '../../assets/polygon-matic-logo.svg'
 import { getUserTokens } from '../../helpers';
 import { useGoodieBag } from '../../hooks/useGoodieBag';
 import { GoodieBagTokens } from '../GoodieBagTokens';
@@ -40,8 +41,48 @@ export const Collection = () => {
     return (
       <section className="s-collection">
         <div className="banner"></div>
-        <h2 className="heading">You do not own any Goodiebags!</h2>
-        <h3 className="heading">Dont panic, You can get some</h3>
+        <div className='no-collection'>
+          <h2 className="heading">You do not own any Goodiebags :(</h2>
+          <h3 className="heading sub-heading">Get some below</h3>
+
+          <div className="bags">
+
+            <Link className="bags__bag flip-card" to={`/discover/polygon-bag`}>
+              <div className='flip-card-container'>
+                <div className='flip-card-front'>
+                  <img src={maticSvg} className="s-polygon-logo" alt="polygon logo" />
+                  <h2>Polygon 10</h2>
+                </div>
+                <div className="flip-card-back">
+                  <p className="bags__bag-title">Polygon goodiebag</p>
+                </div>
+              </div>
+            </Link>
+            <Link className="bags__bag flip-card" to={`/discover/polygon-bag`}>
+              <div className='flip-card-container'>
+                <div className='flip-card-front'>
+                  <img src={maticSvg} className="s-polygon-logo" alt="polygon logo" />
+                  <h2>Polygon 20</h2>
+                </div>
+                <div className="flip-card-back">
+                  <p className="bags__bag-title">Polygon goodiebag</p>
+                </div>
+              </div>
+            </Link>
+            <Link className="bags__bag flip-card" to={`/discover/polygon-bag`}>
+              <div className='flip-card-container'>
+                <div className='flip-card-front'>
+                  <img src={maticSvg} className="s-polygon-logo" alt="polygon logo" />
+                  <h2>Polygon 30</h2>
+                </div>
+                <div className="flip-card-back">
+                  <p className="bags__bag-title">Polygon goodiebag</p>
+                </div>
+              </div>
+            </Link>
+
+          </div>
+        </div>  
       </section>
     );
 
