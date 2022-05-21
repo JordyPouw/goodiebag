@@ -11,7 +11,7 @@
     "deploy_on_local_chain": "hardhat run --network localhost scripts/deploy.js",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
-    "polygon": "CONTRACT=0x9A6f314906B842345F5525b8d2F6a7A017Bc3C9A react-app-rewired start"
+    "polygon": "REACT_APP_CONTRACT=0x9A6f314906B842345F5525b8d2F6a7A017Bc3C9A react-app-rewired start"
   },
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
