@@ -4,3 +4,52 @@
   padding: 30px;
   background: lightgreen;
 }
+
+.s-bag-details .breadcrumbs {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 20px;
+  margin-bottom: 30px;
+  padding: 0;
+  list-style: none;
+  font-size: rem(12px);
+
+  li { position: relative; }
+
+  li:after {
+    position: absolute;
+    top: 0;
+    right: -15px;
+    content: "»";
+    display: block;
+  }
+
+  li:last-child:after { content: none; }
+}
+
+.s-bag-details .split {
+  display: flex;
+  gap: 20px;
+}
+
+.s-bag-details .fancy-box {
+  flex: 1;
+  max-width: 500px;
+  max-height: 500px;
+  aspect-ratio: 1/1;
+  background: darkgreen;
+}
+
+.s-bag-details .info {
+  flex: 1;
+}
+
+.s-bag-details .name {
+  flex: 1;
+}
+
+.s-bag-details .token {
+  height: 100px;
+  margin-top: 30px;
+  background: yellow;
+}
