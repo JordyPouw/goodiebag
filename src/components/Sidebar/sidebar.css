@@ -9,7 +9,7 @@
 	max-width: 220px;
 	height: 100vh;
 	padding: 15px;
-	background: #f2f2f2;
+	background-color: #fff;
 	box-shadow: 16px 0px 12px -20px rgba(0, 0, 0, 0.45);
 }
 
@@ -83,6 +83,7 @@
 	width: fit-content;
 	padding: 60px;
 	display: none;
+	background-color: #fff;
 }
 
 .s-wallet-pop-up.active {
