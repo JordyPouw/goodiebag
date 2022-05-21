@@ -27,10 +27,9 @@ export const Sidebar = () => {
 
 	return (
 		<section className="s-sidebar">
-			<div className="logo">
+			<Link to="discover" className="logo">
 				<img src={logoUrl} alt="goodibag_logo" />
-			</div>
-
+			</Link>
 			<ul>
 				<li>
 					<Link to="discover">Discover</Link>

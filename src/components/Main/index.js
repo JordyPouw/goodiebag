@@ -12,7 +12,9 @@ export const Main = () => {
 
   return (
     <section className="s-main">
-      <div className="banner"></div>
+      <div className="banner">
+        <h1 className='banner-title neonText'>NFT GOODIE BAG</h1>
+      </div>
 
       <h2 className="heading">Discover our goodiebags!</h2>
       <p className="subheading">
