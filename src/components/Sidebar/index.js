@@ -40,7 +40,7 @@ export const Sidebar = () => {
 				</li>
 				<li>
 					{/* <Link to="how-to">How to</Link> */}
-					<HowTo isOpen={howtoModal} handleClick={handleHowToClick}>HowTo</HowTo>
+					<HowTo isOpen={howtoModal} handleClick={handleHowToClick}>How to</HowTo>
 				</li>
 			</ul>
 
