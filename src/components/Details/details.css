@@ -25,6 +25,8 @@
   }
 
   li:last-child:after { content: none; }
+
+  li a { text-decoration: none; }
 }
 
 .s-bag-details .split {

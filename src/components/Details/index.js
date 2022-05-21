@@ -1,4 +1,4 @@
-import { useLocation, useParams } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 
 import './details.css';
 import ActiveAccount from '../ActiveAccount';
@@ -15,8 +15,14 @@ export const BagDetails = () => {
       <ul className="breadcrumbs">
         {crumbs.map((c, index) => (
           <li>
-            {bagUuid && index === crumbs.length - 1 && `Goodiebag #`}
-            {prettyName(c)}
+            {index !== crumbs.length - 1 ? (
+              <Link to={`/${c}`}>{prettyName(c)}</Link>
+            ) : (
+              <>
+                {bagUuid && index === crumbs.length - 1 && `Goodiebag #`}
+                {prettyName(c)}
+              </>
+            )}
           </li>
         ))}
       </ul>
