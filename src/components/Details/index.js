@@ -4,6 +4,7 @@ import './details.css';
 import ActiveAccount from '../ActiveAccount';
 import { Mint } from '../Mint';
 import { Redeem } from '../Redeem';
+import { Transfer } from '../Transfer';
 
 export const BagDetails = () => {
   const { bagName, bagUuid } = useParams();
@@ -54,6 +55,7 @@ export const BagDetails = () => {
       {bagUuid ? (
         <>
           <Redeem tokenId={bagUuid} />
+          <Transfer tokenId={bagUuid} />
         </>
       ) : (
         <>

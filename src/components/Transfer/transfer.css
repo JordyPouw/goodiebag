@@ -1,0 +1,11 @@
+.s-transfer {
+  max-width: 150px;
+  margin: 50px auto;
+}
+
+.s-transfer .button {
+  display: block;
+  width: 100%;
+  border: 0;
+  padding: 5px;
+}

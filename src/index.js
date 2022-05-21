@@ -17,3 +17,4 @@ root.render(
     </Router>
   </React.StrictMode>,
 );
+export { useTokenBalance } from "./hooks/useTokenBalance";

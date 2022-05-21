@@ -15,5 +15,6 @@ export function useGoodieBag() {
   });
   const mint = useContractWrite(config, 'mint');
   const redeem = useContractWrite(config, 'redeem');
-  return { contractConfig: config, mint, redeem, contract };
+  const transferFrom = useContractWrite(config, 'transferFrom');
+  return { contractConfig: config, mint, redeem, contract, transferFrom };
 }
