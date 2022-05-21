@@ -1,0 +1,17 @@
+.s-sidebar {
+  position: sticky;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 250px;
+  height: 100vh;
+  padding: 15px;
+  background: lightpink;
+}
+.s-sidebar .logo {
+  width: 64px;
+  height: 64px;
+}

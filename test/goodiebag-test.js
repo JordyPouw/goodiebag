@@ -23,7 +23,7 @@ async function printTokenBalance(goodieBag, nft) {
       nft.toString(),
       'balance',
       tokenAddress,
-      tokenBalance/(ETH).toString(),
+      tokenBalance / ETH.toString(),
     );
   }
 }
@@ -77,7 +77,7 @@ describe('GoodieBag', function () {
       .transferFrom(owner.address, account1.address, '0');
     expect(await goodieBag.ownerOf('0')).to.be.equal(account1.address);
     for (const user of [owner, account1]) {
-      console.log('Wallet', user.address)
+      console.log('Wallet', user.address);
       const balance = await goodieBag.balanceOf(user.address);
       for (let i = 0; i < balance.toNumber(); i++) {
         const tokenId = await goodieBag.tokenOfOwnerByIndex(user.address, i);
@@ -86,7 +86,7 @@ describe('GoodieBag', function () {
     }
     await goodieBag.connect(account1).redeem('0');
     for (const user of [owner, account1]) {
-      console.log('Wallet', user.address)
+      console.log('Wallet', user.address);
       const balance = await goodieBag.balanceOf(user.address);
       for (let i = 0; i < balance.toNumber(); i++) {
         const tokenId = await goodieBag.tokenOfOwnerByIndex(user.address, i);

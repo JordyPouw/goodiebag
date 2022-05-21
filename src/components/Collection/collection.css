@@ -1,0 +1,23 @@
+.s-collection {
+  min-height: 100vh;
+  width: 100%;
+  padding: 30px;
+  background: purple;
+}
+
+.s-collection .heading {
+  margin-bottom: 20px;
+  font-size: rem(18px);
+}
+
+.s-collection .bags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.s-collection .bag {
+  width: 250px;
+  height: 250px;
+  background: orange;
+}

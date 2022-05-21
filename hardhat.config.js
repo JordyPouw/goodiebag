@@ -20,6 +20,10 @@ module.exports = {
         blockNumber: 28305129,
       },
     },
+    matic: {
+      url: 'https://polygon-rpc.com',
+      accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
+    },
   },
   gasReporter: {
     enabled: process.env.REPORT_GAS !== undefined,
