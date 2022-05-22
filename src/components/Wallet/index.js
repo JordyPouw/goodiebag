@@ -1,6 +1,7 @@
 import { useAccount, useBalance, useConnect } from 'wagmi';
 import { InjectedConnector } from 'wagmi/connectors/injected';
 import maticSvg from '../../assets/polygon-matic-logo.svg'
+import ethSvg from '../../assets/ethereum-eth-logo.svg';
 import './wallet.css';
 import classNames from "classnames";
 import { getByLabel } from '../../tokens';
@@ -29,16 +30,25 @@ function WalletDetails({ account, ...props }) {
       <div className="s-close-pop-up" onClick={() => props.handleClick()}></div>
       <div className='s-wallet-address'><span className='bold'>Wallet address:</span> {account.address}</div>
 
-      <div className='s-matic-balance'>
+      <div className='s-balance'>
         <span className='bold'>Balance: </span>
 
-        <div className='s-matic-balance-amt'>
-          {balance?.formatted} MATIC
+        <div className='s-balance-amt'>
           <img src={maticSvg} className="s-polygon-logo" alt="polygon logo" />
+          {balance?.formatted} MATIC
         </div>
-        {wmaticBalance && <p>{formatNumber(wmaticBalance)} Wrapped Matic</p>}
-        {ethBalance && <p>{formatNumber(ethBalance)} Wrapped ETH</p>}
-        {awmaticBalance && <p>{formatNumber(awmaticBalance)} Matic in Aave</p>}
+        <div className='s-balance-amt'>
+          <img src={maticSvg} className="s-polygon-logo" alt="polygon logo" />
+          {wmaticBalance && <p>{formatNumber(wmaticBalance)} Wrapped Matic</p>}
+        </div>
+        <div className='s-balance-amt'>
+          <img src={ethSvg} className="s-polygon-logo" alt="polygon logo" />
+          {ethBalance && <p>{formatNumber(ethBalance)} Wrapped ETH</p>}
+        </div>
+        <div className='s-balance-amt'>
+          <img src={maticSvg} className="s-polygon-logo" alt="polygon logo" />
+          {awmaticBalance && <p>{formatNumber(awmaticBalance)} Matic in Aave</p>}
+        </div>
       </div>
 
     </div>
