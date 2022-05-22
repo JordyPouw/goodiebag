@@ -24,8 +24,8 @@ export const HowTo = ({ isOpen, handleClick, children }) => {
                 <h2 className='how-to-title'>How To</h2>
                 <div className='how-to-boxes'>
                     {
-                        howtoboxes.map(box => (
-                            <div className='how-to-box'>
+                        howtoboxes.map((box, i) => (
+                            <div className='how-to-box' key={i}>
                                 <h3 style={{ paddingBottom: '5px' }}>{box.title}</h3>
                                 <p className='how-to-box-desc'>{box.desc}</p>
                             </div>
