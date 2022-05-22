@@ -110,6 +110,11 @@
   font-size: rem(15px);
 }
 
+.s-bag-details .token-balance {
+  font-size: rem(10px);
+  color: grey;
+}
+
 .s-bag-details .token-introduction {
   font-size: rem(14px);
 }

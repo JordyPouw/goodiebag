@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useLocation, useParams } from 'react-router-dom';
+import { useQuery } from 'wagmi';
 import classnames from 'classnames';
 
 import './details.css';
@@ -9,6 +10,9 @@ import PolygonImg from '../../assets/cube-polygon.webp';
 import UniswapImg from '../../assets/cube-uniswap.png';
 import LogoImg from '../../assets/logo_color.png';
 import ActiveAccount from '../ActiveAccount';
+import { tokens } from '../../tokens';
+import { useGoodieBag } from '../../hooks/useGoodieBag';
+import { formatNumber, getNFTTokens } from '../../helpers';
 import { Mint } from '../Mint';
 import { Redeem } from '../Redeem';
 import { Transfer } from '../Transfer';
@@ -16,6 +20,15 @@ import { Transfer } from '../Transfer';
 export const BagDetails = () => {
   const { bagName, bagUuid } = useParams();
   const { pathname } = useLocation();
+  const { contract } = useGoodieBag();
+  const nftTokens = useQuery(
+    ['goodieBagTokens', bagUuid],
+    getNFTTokens.bind(this, contract, bagUuid),
+  );
+  const tokensData = nftTokens.data.tokens.map((t) => ({
+    ...t,
+    ...tokens?.[t.address],
+  }));
   const crumbs = pathname.split('/').filter(Boolean);
 
   const [face, setFace] = useState('front');
@@ -24,38 +37,49 @@ export const BagDetails = () => {
     setFace('front');
   };
 
-  const tokens = [
+  const tokensArray = [
     {
       face: 'top',
       name: 'Aave',
       text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit architecto.',
       sources: [
-        { name: 'source 1', link: 'https://google.com' },
-        { name: 'source 2', link: 'https://google.com' },
-        { name: 'source 3', link: 'https://google.com' },
+        { name: 'Introduction', link: 'https://docs.aave.com/faq/' },
+        { name: 'Tips', link: 'https://docs.aave.com/' },
+        { name: 'Advanced', link: 'https://docs.aave.com/' },
       ],
+      data: tokensData.find((t) => t.label === 'AWMATIC'),
     },
     {
       face: 'bottom',
       name: 'Uniswap',
       text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit architecto.',
       sources: [
-        { name: 'source 1', link: 'https://google.com' },
-        { name: 'source 2', link: 'https://google.com' },
-        { name: 'source 3', link: 'https://google.com' },
+        {
+          name: 'Introduction',
+          link: 'https://docs.uniswap.org/protocol/introduction',
+        },
+        { name: 'Tips', link: 'https://docs.uniswap.org/' },
+        { name: 'Advanced', link: 'https://docs.uniswap.org/' },
       ],
+      data: tokensData.find((t) => t.label === 'WETH'),
     },
     {
       face: 'back',
       name: 'Polygon',
       text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit architecto.',
       sources: [
-        { name: 'source 1', link: 'https://google.com' },
-        { name: 'source 2', link: 'https://google.com' },
-        { name: 'source 3', link: 'https://google.com' },
+        {
+          name: 'Introduction',
+          link: 'https://docs.polygon.technology/docs/home/new-to-polygon/',
+        },
+        { name: 'Tips', link: 'https://docs.polygon.technology/' },
+        { name: 'Advanced', link: 'https://docs.polygon.technology/' },
       ],
+      data: tokensData.find((t) => t.label === 'WMATIC'),
     },
   ];
+
+  console.log({ tokensArray });
 
   return (
     <section className="s-bag-details">
@@ -89,7 +113,7 @@ export const BagDetails = () => {
           </p>
 
           <article className="tokens">
-            {tokens.map((token) => (
+            {tokensArray.map((token) => (
               <div
                 className="token"
                 onMouseEnter={() => {
@@ -98,7 +122,19 @@ export const BagDetails = () => {
                 onMouseLeave={resetFace}
                 key={token.name}
               >
-                <h3 className="token-name">{token.name}</h3>
+                <h3 className="token-name">
+                  {token.name}{' '}
+                  {token.data && (
+                    <span className="token-balance">
+                      {formatNumber(token.data.balance)} {token.data.label} (${' '}
+                      {formatNumber(
+                        token.data.price.mul(token.data.balance),
+                        '26',
+                      )}
+                      )
+                    </span>
+                  )}
+                </h3>
                 <p className="token-introduction">{token.text}</p>
                 {bagUuid && (
                   <ul className="token-sources">
