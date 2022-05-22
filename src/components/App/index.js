@@ -24,7 +24,7 @@ export const App = () => {
         <Sidebar />
         <div style={{ width: "100%" }}>
           <Routes />
-          <p style={{ width: "100%", textAlign: "center", backgroundColor: "#effff0", paddingBottom: "5px" }}>© 2022 NFT GoodieBag.  All rights reserved.</p>
+          <p className='copyrights'>© 2022 NFT GoodieBag.  All rights reserved.</p>
         </div>
       </div>
     </Provider>
