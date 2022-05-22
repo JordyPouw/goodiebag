@@ -48,6 +48,24 @@
   box-shadow: 0 0 5px -1px rgb(0 0 0 / 45%);
 }
 
+.s-bag-details .dots {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 0;
+  list-style: none;
+}
+
+.s-bag-details .dots__dot {
+  background: red;
+  width: 10px;
+  height: 10px;
+}
+
 .s-bag-details .options {
   position: absolute;
   bottom: 0;
@@ -67,12 +85,18 @@
 }
 
 .s-bag-details .token {
+  position: relative;
   height: 110px;
   margin-top: 20px;
   padding: 10px;
   border-radius: 10px;
   background-color: #fff;
   box-shadow: 0 0 5px -1px rgb(0 0 0 / 45%);
+  transition: transform 0.3s;
+
+  &:hover {
+    transform: scale(1.01);
+  }
 }
 
 .s-bag-details. .token-name {

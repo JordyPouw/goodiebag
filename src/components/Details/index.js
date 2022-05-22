@@ -139,21 +139,24 @@ function prettyName(name) {
 }
 
 function FancyBox({ face, setFace }) {
-  const onChange = (e) => {
-    console.log(e.target, e.target.value);
-    setFace(e.target.value);
+  const getFace = (e) => {
+    const target = e.target;
+
+    if (target.dataset.face) {
+      setFace(target.dataset.face);
+    }
   };
 
   return (
     <>
-      <form className="options" onChange={onChange}>
-        <input type="radio" value="front" name="face" />
-        <input type="radio" value="left" name="face" />
-        <input type="radio" value="right" name="face" />
-        <input type="radio" value="top" name="face" />
-        <input type="radio" value="bottom" name="face" />
-        <input type="radio" value="back" name="face" />
-      </form>
+      <ul className="dots" onMouseOver={getFace}>
+        <li className="dots__dot" data-face="front"></li>
+        <li className="dots__dot" data-face="left"></li>
+        <li className="dots__dot" data-face="right"></li>
+        <li className="dots__dot" data-face="top"></li>
+        <li className="dots__dot" data-face="bottom"></li>
+        <li className="dots__dot" data-face="back"></li>
+      </ul>
 
       <div className="cube-wrapper">
         <div className={classnames({ cube: true, [face]: face })}>
