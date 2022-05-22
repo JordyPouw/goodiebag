@@ -8,6 +8,7 @@
 	width: 100%;
 	max-width: 220px;
 	height: 100vh;
+	z-index: 100;
 	padding: 15px;
 	background-color: #fff;
 	box-shadow: 16px 0px 12px -20px rgba(0, 0, 0, 0.45);
@@ -24,15 +25,39 @@
 	list-style-type: none;
 }
 
+.s-sidebar ul li:not(:last-child) {
+	margin-bottom: 15px;
+}
+
+.s-sidebar .link-type-text,
 .s-sidebar ul li a {
 	list-style-type: none;
 	font-size: 20px;
 	text-decoration: none;
 	display: block;
+	position: relative;
 }
 
+.s-sidebar .link-type-text:hover,
 .s-sidebar ul li a:hover {
-	text-decoration: underline;
+	color: var(--main-color);
+}
+
+.s-sidebar .link-type-text:after,
+.s-sidebar ul li a:after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	border-bottom: 3px solid var(--main-color);
+	width: 0;
+	height: 2px;
+	transition: all .25s linear;
+}
+
+.link-type-text:hover::after,
+.s-sidebar ul li a:hover:after {
+	width: 90%;
 }
 
 .s-sidebar .logo {
@@ -51,21 +76,23 @@
 .s-sidebar button {
 	background: var(--secondary-color);
 	color: #fff;
-	width: 100%;
 	font-weight: 600;
 	text-transform: uppercase;
 	border: 2px solid var(--secondary-color);
-	padding: .5em 1em;
+	padding: .7em 3em;
 	cursor: pointer;
 	transition: all .25s ease;
 	margin-bottom: 20px;
-	border-radius: 10px;
+	border-radius: 25px;
 }
 
 .s-sidebar button:hover {
 	background: transparent;
 	color: var(--secondary-color);
-	padding: .5em 1em;
+}
+
+.s-sidebar .s-bottom {
+	text-align: center;
 }
 
 /* Pop Up Close Button*/

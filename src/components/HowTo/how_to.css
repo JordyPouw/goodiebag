@@ -1,72 +1,68 @@
 .link-type-text {
-    font-size: 20px;
-    text-decoration: none;
-    display: block;
-    cursor: pointer;
-}
-
-.link-type-text:hover {
-    text-decoration: underline;
+	font-size: 20px;
+	text-decoration: none;
+	display: block;
+	cursor: pointer;
 }
 
 .how-to-pop-up {
-    display: none;
-    position: fixed;
-    width: calc(100vw - 60px);
-    height: calc(100vh - 60px);
-    border-radius: 10px;
-    top: 30px;
-    left: 30px;
-    overflow-y: scroll;
-    -webkit-box-shadow: 0px 0px 5px -1px rgba(0, 0, 0, 0.45);
-    box-shadow: 0px 0px 5px -1px rgba(0, 0, 0, 0.45);
-    background-color: white;
+	display: none;
+	position: fixed;
+	width: calc(100vw - 60px);
+	height: calc(100vh - 60px);
+	border-radius: 10px;
+	top: 30px;
+	left: 30px;
+	overflow-y: scroll;
+	-webkit-box-shadow: 0px 0px 5px -1px rgba(0, 0, 0, 0.45);
+	box-shadow: 0px 0px 5px -1px rgba(0, 0, 0, 0.45);
+	background-color: white;
 }
 
 .how-to-pop-up.active {
-    display: block;
+	display: block;
 }
 
 h2.how-to-title {
-    text-align: center;
-    margin-top: 3%;
+	text-align: center;
+	margin-top: 3%;
 }
 
 .how-to-boxes {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 140px;
-    padding-top: 10%;
-    padding-bottom: 5%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 140px;
+	padding-top: 10%;
+	padding-bottom: 5%;
 }
 
 @media screen and (max-width: 860px) {
-    .how-to-boxes {
-        flex-direction: column;
-        align-items: center;
-    }
+	.how-to-boxes {
+		flex-direction: column;
+		align-items: center;
+	}
 }
 
 .how-to-box {
-    width: 250px;
-    height: 250px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 10px;
-    border-radius: 10px;
-    background-color: white;
-    -webkit-box-shadow: 0px 0px 5px -1px rgba(0, 0, 0, 0.45);
-    box-shadow: 0px 0px 5px -1px rgba(0, 0, 0, 0.45);
-    transition: all 0.5s;
-    cursor: pointer;
+	width: 250px;
+	height: 250px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 10px;
+	border-radius: 10px;
+	background-color: white;
+	-webkit-box-shadow: 0px 0px 5px -1px rgba(0, 0, 0, 0.45);
+	box-shadow: 0px 0px 5px -1px rgba(0, 0, 0, 0.45);
+	transition: all 0.5s;
+	cursor: pointer;
 }
 
 .how-to-box:hover {
-    transform: scale(1.1);
-    z-index: 1;
-    -webkit-box-shadow: 0px 0px 6px -1px #a6d939;
-    box-shadow: 0px 0px 8px -1px #a6d939;
+	transform: scale(1.1);
+	z-index: 1;
+	-webkit-box-shadow: 0px 0px 6px -1px #a6d939;
+	box-shadow: 0px 0px 8px -1px #a6d939;
 }
