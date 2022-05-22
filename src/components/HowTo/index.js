@@ -8,10 +8,10 @@ import './how_to.css';
 export const HowTo = ({ isOpen, handleClick, children }) => {
 
     const howtoboxes = [
-        { title: 'Connect' },
-        { title: 'Discover' },
-        { title: 'Claim' },
-        { title: 'Learn' },
+        { title: 'Connect', desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ut tristique sapien. Phasellus vel augue suscipit, dapibus mi sed, mattis sapien. Pellentesque convallis velit ex, ullamcorper eleifend est ornare eu. Donec at ligula vitae dolor egestas fringilla in eget dui. Donec in est magna.' },
+        { title: 'Discover', desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ut tristique sapien. Phasellus vel augue suscipit, dapibus mi sed, mattis sapien. Pellentesque convallis velit ex, ullamcorper eleifend est ornare eu. Donec at ligula vitae dolor egestas fringilla in eget dui. Donec in est magna.' },
+        { title: 'Claim', desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ut tristique sapien. Phasellus vel augue suscipit, dapibus mi sed, mattis sapien. Pellentesque convallis velit ex, ullamcorper eleifend est ornare eu. Donec at ligula vitae dolor egestas fringilla in eget dui. Donec in est magna.' },
+        { title: 'Learn', desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ut tristique sapien. Phasellus vel augue suscipit, dapibus mi sed, mattis sapien. Pellentesque convallis velit ex, ullamcorper eleifend est ornare eu. Donec at ligula vitae dolor egestas fringilla in eget dui. Donec in est magna.' },
     ]
 
     return (
@@ -26,7 +26,8 @@ export const HowTo = ({ isOpen, handleClick, children }) => {
                     {
                         howtoboxes.map(box => (
                             <div className='how-to-box'>
-                                <h3>{box.title}</h3>
+                                <h3 style={{ paddingBottom: '5px' }}>{box.title}</h3>
+                                <p className='how-to-box-desc'>{box.desc}</p>
                             </div>
                         ))
                     }
