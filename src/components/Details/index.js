@@ -61,7 +61,7 @@ export const BagDetails = () => {
     <section className="s-bag-details">
       <ul className="breadcrumbs">
         {crumbs.map((c, index) => (
-          <li>
+          <li key={index}>
             {index !== crumbs.length - 1 ? (
               <Link to={`/${c}`}>{prettyName(c)}</Link>
             ) : (
@@ -102,8 +102,8 @@ export const BagDetails = () => {
                 <p className="token-introduction">{token.text}</p>
                 {bagUuid && (
                   <ul className="token-sources">
-                    {token.sources.map((source) => (
-                      <li key={token.link}>
+                    {token.sources.map((source, i) => (
+                      <li key={i}>
                         <a href={source.link} target="_blank">
                           {source.name}
                         </a>

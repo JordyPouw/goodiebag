@@ -9,6 +9,8 @@ export function useMint() {
   const goodieBag = useGoodieBag();
   const transactionContext = useContext(TransactionContext);
   const [busy, setBusy] = useState(false);
+  const [done, setDone] = useState(false);
+
   const mint = useCallback(
     (value) => {
       if (value) {
@@ -23,6 +25,8 @@ export function useMint() {
               .then((data) => {
                 transactionContext.addTransaction(data);
                 setBusy(false);
+                setDone(true);
+                setTimeout(() => setDone(false), 1000);
               })
               .catch(() => setBusy(false));
           })
@@ -31,12 +35,14 @@ export function useMint() {
     },
     [goodieBag, setBusy, transactionContext],
   );
-  return { mint, busy };
+  return { mint, busy, done };
 }
 
 export function Mint() {
   const [value, setValue] = useState();
-  const { mint, busy } = useMint();
+  const { mint, busy, done } = useMint();
+
+  console.log({ done });
 
   return (
     <div className="s-mint">
@@ -50,13 +56,9 @@ export function Mint() {
         />
       </div>
 
-      {busy ? (
-        <p>loading...</p>
-      ) : (
-        <button className="button" onClick={() => mint(value)}>
-          Mint
-        </button>
-      )}
+      <button className="button" onClick={() => mint(value)} disabled={busy}>
+        {busy ? 'Loading..' : 'Mint'}
+      </button>
     </div>
   );
 }
