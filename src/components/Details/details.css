@@ -123,6 +123,12 @@
   font-size: rem(11px);
 }
 
+.s-bag-details .action-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
 /* cube */
 .s-bag-details .cube-wrapper {
   --cubeWidth: 200px;

@@ -28,15 +28,12 @@ export function useRedeem(tokenId) {
 
 export function Redeem({ tokenId }) {
   const { redeem, busy } = useRedeem(tokenId);
+
   return (
     <div className="s-redeem">
-      {busy ? (
-        <p>loading...</p>
-      ) : (
-        <button className="button" onClick={redeem}>
-          Redeem
-        </button>
-      )}
+      <button className="button" onClick={redeem} disabled={busy}>
+        {busy ? 'Loading..' : 'Redeem'}
+      </button>
     </div>
   );
 }

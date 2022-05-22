@@ -118,10 +118,10 @@ export const BagDetails = () => {
       </div>
 
       {bagUuid ? (
-        <>
+        <div className="action-buttons">
           <Redeem tokenId={bagUuid} />
           <Transfer tokenId={bagUuid} />
-        </>
+        </div>
       ) : (
         <>
           <ActiveAccount>

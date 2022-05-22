@@ -1,11 +1,23 @@
 .s-transfer {
-  max-width: 150px;
-  margin: 50px auto;
+  width: 100%;
+  max-width: 120px;
 }
 
 .s-transfer .button {
   display: block;
   width: 100%;
-  border: 0;
   padding: 5px;
+  border-radius: 25px;
+  border: 2px solid var(--secondary-color);
+  color: #fff;
+  background: var(--secondary-color);
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all .25s ease;
+
+  &:hover {
+    color: var(--secondary-color);
+    background: transparent;
+  }
 }
