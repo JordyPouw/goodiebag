@@ -16,6 +16,7 @@ import { formatNumber, getNFTTokens } from '../../helpers';
 import { Mint } from '../Mint';
 import { Redeem } from '../Redeem';
 import { Transfer } from '../Transfer';
+import { RedeemToken } from '../RedeemToken';
 
 export const BagDetails = () => {
   const { bagName, bagUuid } = useParams();
@@ -25,10 +26,12 @@ export const BagDetails = () => {
     ['goodieBagTokens', bagUuid],
     getNFTTokens.bind(this, contract, bagUuid),
   );
-  const tokensData = nftTokens.data.tokens.map((t) => ({
-    ...t,
-    ...tokens?.[t.address],
-  }));
+  const tokensData = bagUuid
+    ? nftTokens.data.tokens.map((t) => ({
+        ...t,
+        ...tokens?.[t.address],
+      }))
+    : [];
   const crumbs = pathname.split('/').filter(Boolean);
 
   const [face, setFace] = useState('front');
@@ -122,6 +125,17 @@ export const BagDetails = () => {
                 onMouseLeave={resetFace}
                 key={token.name}
               >
+                <div className="redeemdadado">
+                  {token.data && formatNumber(token.data.balance) > 0 ? (
+                    <RedeemToken
+                      tokenId={bagUuid}
+                      tokenAddress={token.data.address}
+                    />
+                  ) : !token.data ? null : (
+                    <p className="redeemed">Redeemed</p>
+                  )}
+                </div>
+
                 <h3 className="token-name">
                   {token.name}{' '}
                   {token.data && (
