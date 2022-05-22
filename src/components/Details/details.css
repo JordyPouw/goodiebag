@@ -93,7 +93,7 @@
 
 .s-bag-details .token {
   position: relative;
-  height: 110px;
+  min-height: 120px;
   margin-top: 20px;
   padding: 10px;
   border-radius: 10px;
@@ -106,8 +106,20 @@
   }
 }
 
+.s-bag-details .redeemdadado {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: rem(10px);
+}
+
 .s-bag-details. .token-name {
   font-size: rem(15px);
+}
+
+.s-bag-details .token-balance {
+  font-size: rem(10px);
+  color: grey;
 }
 
 .s-bag-details .token-introduction {
