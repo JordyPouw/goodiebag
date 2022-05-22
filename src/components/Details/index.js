@@ -44,7 +44,7 @@ export const BagDetails = () => {
     {
       face: 'top',
       name: 'Aave',
-      text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit architecto.',
+      text: 'Aave is an Open Source Protocol to create Non-Custodial Liquidity Markets to earn interest on supplying and borrowing assets with a variable or stable token.',
       sources: [
         { name: 'Introduction', link: 'https://docs.aave.com/faq/' },
         { name: 'Tips', link: 'https://docs.aave.com/' },
@@ -55,7 +55,7 @@ export const BagDetails = () => {
     {
       face: 'bottom',
       name: 'Uniswap',
-      text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit architecto.',
+      text: 'Uniswap is an automated liquidity protocol powered by a constant product formula and implemented in a system of non-upgradeable smart contracts on the Ethereum blockchain.',
       sources: [
         {
           name: 'Introduction',
@@ -69,7 +69,7 @@ export const BagDetails = () => {
     {
       face: 'back',
       name: 'Polygon',
-      text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit architecto.',
+      text: 'Polygon, also known as the Matic Network, is a scaling solution that aims to provide multiple tools to improve the speed and reduce the cost and complexities of transactions on the blockchain.',
       sources: [
         {
           name: 'Introduction',
@@ -111,8 +111,9 @@ export const BagDetails = () => {
             {bagUuid ? `Goodiebag #${bagUuid}` : prettyName(bagName)}
           </h2>
           <p className="description">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit odit
-            dolores.
+            This NFT goodiebag helps you to get started in the world of DeFi on
+            Polygon. The WMATIC is already on Aave getting interest and with the
+            WETH you can try out swapping on Uniswap.
           </p>
 
           <article className="tokens">
