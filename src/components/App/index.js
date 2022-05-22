@@ -22,7 +22,10 @@ export const App = () => {
     <Provider client={client}>
       <div className="s-app">
         <Sidebar />
-        <Routes />
+        <div style={{ width: "100%" }}>
+          <Routes />
+          <p className='copyrights'>© 2022 NFT GoodieBag.  All rights reserved.</p>
+        </div>
       </div>
     </Provider>
   );

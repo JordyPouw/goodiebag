@@ -34,9 +34,12 @@ export const Sidebar = () => {
 				<li>
 					<Link to="discover">Discover</Link>
 				</li>
-				<li>
-					<Link to="my-goodiebags">My goodiebags</Link>
-				</li>
+				<ActiveAccount inactiveState={null}>
+					<li>
+						<Link to="my-goodiebags">My goodiebags</Link>
+					</li>
+				</ActiveAccount>
+
 				<li>
 					{/* <Link to="how-to">How to</Link> */}
 					<HowTo isOpen={howtoModal} handleClick={handleHowToClick}>How to</HowTo>
