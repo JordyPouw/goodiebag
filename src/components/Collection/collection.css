@@ -2,6 +2,7 @@
 	min-height: 100vh;
 	width: 100%;
 	padding: 30px;
+	background: #effff0;
 }
 
 .s-collection .banner {
@@ -22,4 +23,72 @@
 	margin: 40px auto 0 auto;
 	justify-content: flex-start;
 	width: 90%;
+}
+
+.has-collection .bags {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.has-collection .bag {
+	text-decoration: none;
+}
+
+.has-collection .minted-bag-container {
+	margin-bottom: 30px;
+	width: calc(50% - 15px);
+	transition: box-shadow .25s linear;
+}
+
+.has-collection .minted-bag-container:hover {
+	box-shadow: 0 0 5px 5px rgb(0 0 0 / 15%);
+}
+
+.has-collection .minted-bag-container:nth-child(2n + 2) {
+	margin-left: 15px;
+}
+
+.has-collection .minted-bag-container:nth-child(2n + 1) {
+	margin-right: 15px;
+}
+
+.has-collection .bag-description-top {
+	margin-bottom: 30px;
+}
+
+.has-collection .bag-description-top h2 {
+	text-align: center;
+	margin-bottom: 30px;
+	text-transform: uppercase;
+}
+
+.has-collection .bag-description-top .bag-table-head {
+	display: flex;
+	justify-content: space-between;
+}
+
+.has-collection .token-balance {
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+	margin-bottom: 20px;
+}
+
+.bag-description-bottom .token-balance .token {
+	display: flex;
+}
+
+.bag-description-bottom .total-value .token-name,
+.bag-description-bottom .token-balance .token-name {
+	width: 100px;
+}
+
+.bag-description-bottom .total-value {
+	border-top: 2px solid var(--secondary-color);
+	padding-top: 20px;
+	margin-top: 30px;
+}
+
+.bag-description-bottom .total-value .token-name {
+	display: inline-block;
 }

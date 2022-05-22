@@ -20,15 +20,27 @@ export function GoodieBagTokens({ tokenId }) {
   return (
     nftTokens.data && (
       <div>
-        <h3>Contents</h3>
-        {nftTokens.data.tokens.map(({ address, balance, price }) => (
-          <p>
-            {tokens?.[address].label || address}: {formatNumber(balance)} ($
-            {formatNumber(price.mul(balance), '26')})
-            <RedeemToken tokenId={tokenId} tokenAddress={address} />
-          </p>
-        ))}
-        <p>Total USD value: {formatNumber(totalUSD, '26')}</p>
+        <div className='bag-description-top'>
+          <h2>Goodiebag {tokenId}</h2>
+          <div className='bag-table-head'>
+            <h3>Contents</h3>
+            <h3>Redeem</h3>
+          </div>
+        </div>
+        <div className='bag-description-bottom'>
+          {nftTokens.data.tokens.map(({ address, balance, price }) => (
+            <p className='token-balance'>
+              <div className='token'>
+                <p className='token-name bold'>{tokens?.[address].label || address}:</p> 
+                <p className='balance'>{formatNumber(balance)} ($ {formatNumber(price.mul(balance), '26')})</p>
+              </div>
+              {formatNumber(balance) > 0 ? 
+                <RedeemToken tokenId={tokenId} tokenAddress={address}/> : 
+                <p className='redeemed'>Redeemed</p>}
+            </p>
+          ))}
+          <p className='total-value'><span className="bold token-name">Total:</span> {formatNumber(totalUSD, '26')} (USD)</p>
+        </div>
       </div>
     )
   );

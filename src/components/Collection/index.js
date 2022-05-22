@@ -23,14 +23,15 @@ export const Collection = () => {
   if(userGoodieBags.data.length > 0){
 
     return (
-      <section className="s-collection">
+      <section className="s-collection has-collection">
         <ActiveAccount inactiveState={<EmptyState />}>
           <div className="bags">
             {userGoodieBags.data?.map((token) => (
-              <Link className="bag" to={`/my-goodiebags/${token}`}>
-                <h2>Goodiebag {token}</h2>
-                <GoodieBagTokens tokenId={token} />
-              </Link>
+              <div className='section-container minted-bag-container'>
+                <Link className="bag" to={`/my-goodiebags/${token}`}>
+                  <GoodieBagTokens tokenId={token} />
+                </Link>
+              </div>
             ))}
           </div>
         </ActiveAccount>

@@ -2,7 +2,21 @@
 }
 
 .s-redeem_token .button {
-  display: block;
-  width: 100%;
-  border: 0;
+	display: block;
+	width: 100%;
+	border: 2px solid var(--default-color);
+	border-radius: 24px;
+	background: transparent;
+	padding: 0.25em 1em;
+	transition: all .25s linear;
+	cursor: pointer;
+}
+
+.s-redeem_token .button:hover {
+	color: white;
+	background: var(--default-color);
+}
+
+.token-balance .redeemed {
+	cursor: default;
 }
