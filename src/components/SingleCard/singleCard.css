@@ -1,17 +1,12 @@
+.s-main .bags__bag,
 .no-collection .bags__bag {
-	width: 250px;
-	height: 250px;
+	width: 280px;
+	height: 280px;
 	display: flex;
 	border-radius: 10px;
 }
 
 /* Flip card Styles */
-.flip-card {
-	background-color: transparent;
-	width: 300px;
-	height: 300px;
-	perspective: 1000px;
-}
 
 .flip-card-container {
 	position: relative;
@@ -46,6 +41,7 @@
 .flip-card-front {
 	align-items: center;
 	overflow: hidden;
+	background-color: #fff;
 }
 
 .flip-card-front h2 {
@@ -55,11 +51,8 @@
 
 .flip-card-back {
 	padding: 30px;
-	align-items: flex-start;
 	transform: rotateY(180deg);
-}
-
-.flip-card-back {
+	background-color: #fff;
 	text-align: left;
 	justify-content: flex-start;
 }

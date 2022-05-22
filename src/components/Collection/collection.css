@@ -15,25 +15,6 @@
 	box-shadow: 0px 0px 5px -1px rgba(0, 0, 0, 0.45);
 }
 
-.s-collection .no-collection {
-	background-color: #fff;
-	border-radius: 10px;
-	padding: 60px 20px;
-	-webkit-box-shadow: 0px 0px 5px -1px rgba(0, 0, 0, 0.45);
-	box-shadow: 0px 0px 5px -1px rgba(0, 0, 0, 0.45);
-}
-
-.no-collection .heading {
-	margin-bottom: 20px;
-	font-size: rem(20px);
-	text-align: center;
-	margin-bottom: 0;
-}
-
-.no-collection .sub-heading {
-	opacity: .7;
-}
-
 .no-collection .bags {
 	display: flex;
 	flex-wrap: wrap;

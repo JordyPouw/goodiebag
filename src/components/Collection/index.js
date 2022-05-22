@@ -41,19 +41,17 @@ export const Collection = () => {
 
     return (
       <section className="s-collection">
-        <div className='no-collection'>
+        <div className='no-collection section-container'>
           <div className="banner"></div>
           <h2 className="heading">You do not own any Goodiebags :(</h2>
           <h3 className="heading sub-heading">Get some below</h3>
 
           <div className="bags">
-
-            <SingleCard frontImg={polygonBagSvg} title="Polygon 10" text="Some stats and description of the NFT"/>
-            <SingleCard frontImg={polygonBagSvg} title="Polygon 20" text="Some stats and description of the NFT"/>
-            <SingleCard frontImg={polygonBagSvg} title="Polygon 30" text="Some stats and description of the NFT"/>
-            <SingleCard frontImg={polygonBagSvg} title="Polygon 40" text="Some stats and description of the NFT"/>
-
+            <SingleCard cardKey="1" frontImg={polygonBagSvg} title="Polygon 10" text="Some stats and description of the NFT"/>
+            <SingleCard cardKey="2" frontImg={polygonBagSvg} title="Polygon 20" text="Some stats and description of the NFT"/>
+            <SingleCard cardKey="3" frontImg={polygonBagSvg} title="Polygon 30" text="Some stats and description of the NFT"/>
           </div>
+          
         </div>  
       </section>
     );
