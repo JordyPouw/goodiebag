@@ -99,8 +99,8 @@
 .s-main .bags {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 30px;
+	/* gap: 30px; */
 	margin: 40px auto 0 auto;
 	justify-content: flex-start;
-	width: 90%;
+	/* width: 90%; */
 }

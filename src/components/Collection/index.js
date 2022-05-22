@@ -20,7 +20,7 @@ export const Collection = () => {
   useTransactionEffect(userGoodieBags.refetch);
 
 
-  if(userGoodieBags.data.length > 0){
+  if(userGoodieBags.data && userGoodieBags.data.length > 0){
 
     return (
       <section className="s-collection has-collection">

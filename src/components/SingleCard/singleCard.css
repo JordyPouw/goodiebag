@@ -1,7 +1,17 @@
+.s-main .s-single-card,
+.no-collection .s-single-card {
+	width: calc(33% - 30px);
+	max-width: 330px;
+	margin: 0 15px;
+	height: 330px;
+	display: flex;
+	border-radius: 10px;
+}
+
 .s-main .bags__bag,
 .no-collection .bags__bag {
-	width: 280px;
-	height: 280px;
+	width: 100%;
+	height: 100%;
 	display: flex;
 	border-radius: 10px;
 }
@@ -42,6 +52,11 @@
 	align-items: center;
 	overflow: hidden;
 	background-color: #fff;
+}
+
+.flip-card-front img {
+	height: 100%;
+	object-fit: cover;
 }
 
 .flip-card-front h2 {

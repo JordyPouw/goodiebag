@@ -2,6 +2,8 @@ import { tokens } from '../tokens';
 import { ethers } from 'ethers';
 import { formatNumber, getNFTTokens } from '../helpers';
 import { useGoodieBag } from '../hooks/useGoodieBag';
+import wmatic from '../assets/polygon-matic-logo.svg';
+import eth from '../assets/ethereum-eth-logo.svg';
 import { useQuery } from 'wagmi';
 import { useTransactionEffect } from '../hooks/useTransactionCallback';
 import { RedeemToken } from './RedeemToken';
@@ -17,6 +19,13 @@ export function GoodieBagTokens({ tokenId }) {
     (memo, { balance, price }) => memo.add(balance.mul(price)),
     ethers.utils.parseEther('0'),
   );
+  const getTheImage = (name) => {
+    if(name == 'WMATIC' || name == "AWMATIC"){
+      return wmatic
+    }else if(name == "WETH"){
+      return eth
+    }
+  }
   return (
     nftTokens.data && (
       <div>
@@ -29,8 +38,9 @@ export function GoodieBagTokens({ tokenId }) {
         </div>
         <div className='bag-description-bottom'>
           {nftTokens.data.tokens.map(({ address, balance, price }) => (
-            <p className='token-balance'>
+            <p className="token-balance">
               <div className='token'>
+                <img src={getTheImage(tokens?.[address].label || address)} alt="goodibag_logo" />
                 <p className='token-name bold'>{tokens?.[address].label || address}:</p> 
                 <p className='balance'>{formatNumber(balance)} ($ {formatNumber(price.mul(balance), '26')})</p>
               </div>
@@ -39,7 +49,7 @@ export function GoodieBagTokens({ tokenId }) {
                 <p className='redeemed'>Redeemed</p>}
             </p>
           ))}
-          <p className='total-value'><span className="bold token-name">Total:</span> {formatNumber(totalUSD, '26')} (USD)</p>
+          <p className='total-value'><span className="bold token-name">Total:</span> ${formatNumber(totalUSD, '26')} (USD)</p>
         </div>
       </div>
     )

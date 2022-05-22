@@ -28,8 +28,7 @@ export const Main = () => {
         <div className="bags">
           <SingleCard cardKey="1" frontImg={polygonBagSvg} title="Polygon 10" text="Some stats and description of the NFT"/>
           <SingleCard cardKey="2" frontImg={polygonBagSvg} title="Polygon 20" text="Some stats and description of the NFT"/>
-          <SingleCard cardKey="3" frontImg={polygonBagSvg} title="Polygon 30" text="Some stats and description of the NFT"/>
-        </div>
+          <SingleCard cardKey="3" frontImg={polygonBagSvg} title="Polygon 30" text="Some stats and description of the NFT"/>        </div>
       </div>
       
     </section>

@@ -19,15 +19,16 @@
 .no-collection .bags {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 30px;
 	margin: 40px auto 0 auto;
 	justify-content: flex-start;
-	width: 90%;
+	width: 100%;
 }
 
 .has-collection .bags {
 	display: flex;
 	flex-wrap: wrap;
+	width: 90%;
+	margin: 0 auto;
 }
 
 .has-collection .bag {
@@ -72,13 +73,20 @@
 	width: 100%;
 	justify-content: space-between;
 	margin-bottom: 20px;
+	position: relative;
 }
 
 .bag-description-bottom .token-balance .token {
 	display: flex;
+	align-items: center;
 }
 
-.bag-description-bottom .total-value .token-name,
+.bag-description-bottom .token-balance .token img {
+	width: 20px;
+	height: 20px;
+	margin-right: 10px;
+}
+
 .bag-description-bottom .token-balance .token-name {
 	width: 100px;
 }
@@ -91,4 +99,5 @@
 
 .bag-description-bottom .total-value .token-name {
 	display: inline-block;
+	margin-right: 10px;
 }
